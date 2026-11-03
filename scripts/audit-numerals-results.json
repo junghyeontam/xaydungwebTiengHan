@@ -1,0 +1,386 @@
+{
+  "font-mono": [
+    {
+      "file": "src/app/[locale]/(admin)/admin/audit-logs/page.tsx",
+      "line": 166,
+      "content": "<div className=\"bg-admin-subtle/80 p-3 rounded-lg border border-admin-border font-mono text-[11px] overflow-x-auto max-h-72\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 147,
+      "content": "className=\"w-full h-12 rounded-lg border border-admin-border/50 shadow-inner flex items-center justify-center text-[10px] font-mono font-bold\""
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 154,
+      "content": "<p className=\"text-[10px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 175,
+      "content": "<span className=\"text-[11px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 184,
+      "content": "<span className=\"text-[11px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 193,
+      "content": "<span className=\"text-[11px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 202,
+      "content": "<span className=\"text-[11px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 211,
+      "content": "<span className=\"text-[11px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 220,
+      "content": "<span className=\"text-[11px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/error.tsx",
+      "line": 33,
+      "content": "<p className=\"text-[10px] font-mono text-admin-text-muted\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/health/page.tsx",
+      "line": 141,
+      "content": "<span className=\"font-mono text-admin-text-secondary\">{item.key}</span>"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/health/page.tsx",
+      "line": 161,
+      "content": "<p className=\"text-[10px] font-mono text-admin-text-muted\">{item.id}</p>"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/health/page.tsx",
+      "line": 191,
+      "content": "<td className=\"py-2.5 px-3 font-mono font-semibold text-admin-text-primary\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/marketing/coupons/page.tsx",
+      "line": 138,
+      "content": "<span className=\"font-mono font-bold text-xs tracking-wider text-admin-brand-dark bg-admin-subtle px-2 py-1 rounded border border-admin-border\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/sales/orders/page.tsx",
+      "line": 45,
+      "content": "<td className=\"py-3.5 px-4 font-mono font-semibold text-admin-brand-teal\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/settings/staff/page.tsx",
+      "line": 279,
+      "content": "<div className=\"text-[10px] font-mono text-admin-text-muted\">{perm.key}</div>"
+    },
+    {
+      "file": "src/components/shop/CheckoutModal.tsx",
+      "line": 204,
+      "content": "<div className=\"w-full h-full bg-white flex flex-col items-center justify-center text-[10px] font-mono font-bold text-gray-900\">"
+    },
+    {
+      "file": "src/components/srs/CreateDeckModal.tsx",
+      "line": 234,
+      "content": "className=\"w-full p-3 rounded-xl border border-border bg-background text-xs font-mono text-foreground focus:ring-2 focus:ring-junghyeon-teal outline-none\""
+    }
+  ],
+  "font-mono-num": [],
+  "monospace": [
+    {
+      "file": "src/app/(learner)/products/page.tsx",
+      "line": 205,
+      "content": "{/* Price Block (Deep green price #12302F, never monospace, strikethrough in muted gray) */}"
+    },
+    {
+      "file": "src/app/globals.css",
+      "line": 92,
+      "content": "* Unified Numeral Typography System (Primary UI font only, never monospace)"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 241,
+      "content": "Primary UI font (Be Vietnam Pro / Plus Jakarta Sans). Never monospace. Plain zero (no slash, no dot)."
+    },
+    {
+      "file": "src/components/shared/Count.tsx",
+      "line": 23,
+      "content": "* - Always uses primary sans font (never monospace)."
+    },
+    {
+      "file": "src/components/shared/Delta.tsx",
+      "line": 26,
+      "content": "* - Proportional lining numerals, never monospace"
+    },
+    {
+      "file": "src/components/shared/Num.tsx",
+      "line": 32,
+      "content": "* - Never monospace; never breaks across lines (white-space: nowrap)."
+    },
+    {
+      "file": "src/components/shared/Percent.tsx",
+      "line": 24,
+      "content": "* - Never monospace; never breaks lines."
+    },
+    {
+      "file": "src/components/shared/Phone.tsx",
+      "line": 17,
+      "content": "* - Always renders in primary sans font (never monospace)."
+    },
+    {
+      "file": "src/components/shared/Price.tsx",
+      "line": 34,
+      "content": "* - Always renders in primary UI font with proportional lining figures (never monospace)."
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 227,
+      "content": "* Never monospace."
+    },
+    {
+      "file": "src/styles/admin-tokens.css",
+      "line": 105,
+      "content": "* Admin Numeral & Data Typography Tokens (Primary UI font only, never monospace)"
+    }
+  ],
+  "slashed-zero": [],
+  "zero": [],
+  "tabular-nums": [
+    {
+      "file": "src/app/globals.css",
+      "line": 103,
+      "content": "font-variant-numeric: lining-nums tabular-nums;"
+    },
+    {
+      "file": "src/app/globals.css",
+      "line": 133,
+      "content": "font-variant-numeric: lining-nums tabular-nums !important;"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 447,
+      "content": "<span className=\"tabular-nums font-semibold text-admin-text-secondary\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/learners/page.tsx",
+      "line": 110,
+      "content": "<td className=\"py-3.5 px-4 tabular-nums font-semibold text-admin-brand-teal\">"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/learners/page.tsx",
+      "line": 114,
+      "content": "<span className=\"inline-flex items-center gap-1 text-admin-brand-coral font-semibold tabular-nums\">"
+    },
+    {
+      "file": "src/styles/admin-tokens.css",
+      "line": 118,
+      "content": "font-variant-numeric: lining-nums tabular-nums;"
+    }
+  ],
+  "fontFamily.mono": [],
+  "ui-monospace": [],
+  "JetBrains Mono": [],
+  "Roboto Mono": [],
+  "Space Mono": [],
+  "Courier": [],
+  "Menlo": [],
+  "code-tag": [],
+  "toLocaleString": [],
+  "toFixed": [
+    {
+      "file": "src/lib/format.ts",
+      "line": 78,
+      "content": "const str = fixed.toFixed(1).replace(/\\.0$/, \"\");"
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 137,
+      "content": "const str = fixed.toFixed(1).replace(/\\.0$/, \"\");"
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 191,
+      "content": "const str = fixed.toFixed(1).replace(/\\.0$/, \"\");"
+    },
+    {
+      "file": "src/lib/srs/sm2.ts",
+      "line": 66,
+      "content": "easinessFactor: Number(easinessFactor.toFixed(2)),"
+    }
+  ],
+  "hardcoded-currency": [
+    {
+      "file": "src/app/(learner)/profile/page.tsx",
+      "line": 387,
+      "content": "<span className=\"text-xs font-bold text-junghyeon-teal\">3 / 6 đã mở khoá</span>"
+    },
+    {
+      "file": "src/app/(learner)/roadmap/page.tsx",
+      "line": 51,
+      "content": ": \"Từng chặng đường rõ ràng từ con số 0 đến TOPIK 6. Học xong bài nào, nắm chắc bài đó!\"}"
+    },
+    {
+      "file": "src/app/(learner)/topik/page.tsx",
+      "line": 245,
+      "content": "onClick={() => alert(\"Đề TOPIK II yêu cầu hoàn thành Sơ cấp 2 để mở khoá!\")}"
+    },
+    {
+      "file": "src/app/(learner)/topik/page.tsx",
+      "line": 303,
+      "content": "{/* Danh sách 4 đáp án */}"
+    },
+    {
+      "file": "src/app/api/ai/honey/route.ts",
+      "line": 6,
+      "content": "1. Giải đáp thắc mắc về các khoá học tiếng Hàn từ số 0 đến TOPIK 6."
+    },
+    {
+      "file": "src/app/api/ai/honey/route.ts",
+      "line": 62,
+      "content": "\"Dạ! Tiếng Hàn JungHyeon có các gói học rất tiết kiệm: Gói Cơ bản miễn phí trọn đời (trải nghiệm Hangul và các bài đầu); Gói Premium chỉ 199.000đ/tháng hoặc gói Trọn đời 1.490.000đ (mở khoá trọn vẹn TOPIK 1-6, không giới hạn thẻ SRS và sửa phát âm AI). Bạn có muốn đăng ký học thử 7 ngày miễn phí không ạ?\";"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/page.tsx",
+      "line": 89,
+      "content": "goal: \"Luyện thi TOPIK 4 để du học D2\","
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/sales/leads/page.tsx",
+      "line": 10,
+      "content": "{ id: \"ld-1\", name: \"Nguyễn Hải Đăng\", phone: \"0988 112 233\", goal: \"Luyện thi TOPIK 4 để du học D2\", status: \"new\", createdAt: \"10 phút trước\", source: \"Form tư vấn nhanh\" },"
+    },
+    {
+      "file": "src/components/home/JungHyeonTreeBlock.tsx",
+      "line": 89,
+      "content": "descriptionVi: \"Đỉnh cao thông thạo tiếng Hàn TOPIK 5-6, đoá hoa kiên định toả hương.\","
+    },
+    {
+      "file": "src/components/home/RoadmapSummaryBlock.tsx",
+      "line": 30,
+      "content": ": \"40 chữ cái • 1.200 từ vựng • 45 điểm ngữ pháp\","
+    },
+    {
+      "file": "src/components/shared/Price.tsx",
+      "line": 87,
+      "content": "// e.g. \"1,490,000 VND\" or \"48.5M VND\""
+    },
+    {
+      "file": "src/components/shared/Price.tsx",
+      "line": 92,
+      "content": "// e.g. \"1.490.000 ₫\" or \"48,5 tr ₫\""
+    },
+    {
+      "file": "src/features/crm/leads-service.ts",
+      "line": 54,
+      "content": "goal: \"Luyện thi TOPIK 4 để du học D2\","
+    },
+    {
+      "file": "src/lib/context/SrsContext.tsx",
+      "line": 76,
+      "content": "description: \"Học cách dùng 20 động từ xuất hiện nhiều nhất trong K-drama.\","
+    },
+    {
+      "file": "src/lib/data/roadmap-data.ts",
+      "line": 83,
+      "content": "shortDesc: \"Bí quyết phát âm 7 đại diện âm cuối và các trường hợp phụ âm đôi.\","
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 112,
+      "content": "* - formatCurrencyVND(1490000, \"vi\") -> \"1.490.000 ₫\""
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 116,
+      "content": "* - formatCurrencyVND(0, \"vi\") -> \"0 ₫\""
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 143,
+      "content": "return `${formatDecimal(safeAmount / 1e9)} tỷ\\u00A0₫`;"
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 146,
+      "content": "return `${formatDecimal(safeAmount / 1e6)} tr\\u00A0₫`;"
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 148,
+      "content": "return `${formatNumber(safeAmount, \"vi\")}\\u00A0₫`;"
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 164,
+      "content": "return `${formatNumber(safeAmount, \"vi\")}\\u00A0₫`;"
+    }
+  ],
+  "hardcoded-k-or-M": [
+    {
+      "file": "src/app/api/ai/honey/route.ts",
+      "line": 8,
+      "content": "3. Cung cấp thông tin học phí, gói Premium (199k/tháng hoặc trọn đời 1.490k), chính sách học thử 7 ngày miễn phí."
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/analytics/page.tsx",
+      "line": 8,
+      "content": "const [range, setRange] = useState<\"7d\" | \"30d\" | \"90d\" | \"12m\">(\"30d\");"
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/analytics/page.tsx",
+      "line": 59,
+      "content": "{([\"7d\", \"30d\", \"90d\", \"12m\"] as const).map((r) => ("
+    },
+    {
+      "file": "src/app/[locale]/(admin)/admin/design/page.tsx",
+      "line": 437,
+      "content": "{ label: \"Free\", count: \"1.2k\", color: \"bg-[#B3BAB9]\" },"
+    },
+    {
+      "file": "src/components/shared/Count.tsx",
+      "line": 51,
+      "content": "// If string like \"1.9k\" was passed, parse or clean"
+    },
+    {
+      "file": "src/components/shared/MascotHoney.tsx",
+      "line": 156,
+      "content": "<path d=\"M74 94L86 94M80 88L80 100\" stroke=\"#1F2937\" strokeWidth=\"3\" strokeLinecap=\"round\" />"
+    },
+    {
+      "file": "src/components/shared/Price.tsx",
+      "line": 87,
+      "content": "// e.g. \"1,490,000 VND\" or \"48.5M VND\""
+    },
+    {
+      "file": "src/components/ui/MascotHoney.tsx",
+      "line": 156,
+      "content": "<path d=\"M74 94L86 94M80 88L80 100\" stroke=\"#1F2937\" strokeWidth=\"3\" strokeLinecap=\"round\" />"
+    },
+    {
+      "file": "src/lib/data/products-data.ts",
+      "line": 55,
+      "content": "description: \"45 bài giảng video chất lượng 4K do Giảng viên ĐHQG giảng dạy.\","
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 51,
+      "content": "* - Revenue: 48500000 -> vi \"48,5 triệu\", en \"48.5M\""
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 53,
+      "content": "*   When compact is forced or >= 100,000: vi \"1,9 nghìn\" (never \"1,9 N\"), en \"1.9k\"."
+    },
+    {
+      "file": "src/lib/format.ts",
+      "line": 115,
+      "content": "* - formatCurrencyVND(48500000, { locale: \"en\", compact: true }) -> \"48.5M VND\""
+    }
+  ]
+}

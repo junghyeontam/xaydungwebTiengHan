@@ -1,0 +1,64 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "JSXAttribute[name.name='className'] Literal[value=/\\b(border-black|border-foreground|border-current)\\b/]",
+        "message": "Black/foreground borders are forbidden. Use tokens --color-border or semantic surface fills instead."
+      }
+    ],
+    "no-restricted-properties": [
+      "error",
+      {
+        "property": "toLocaleString",
+        "message": "Direct toLocaleString is forbidden. Use formatNumber, formatCurrencyVND, or formatDate from @/lib/format."
+      },
+      {
+        "property": "toFixed",
+        "message": "Direct toFixed is forbidden. Use formatNumber or formatPercent from @/lib/format."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/lib/format.ts",
+        "src/lib/srs/sm2.ts",
+        "scripts/**/*"
+      ],
+      "rules": {
+        "no-restricted-properties": "off"
+      }
+    },
+    {
+      "files": [
+        "src/app/\\(learner\\)/**/*",
+        "src/app/*",
+        "src/components/!(admin)/**/*",
+        "src/components/*",
+        "src/features/**/*",
+        "src/lib/**/*",
+        "src/types/**/*"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@/app/**/(admin)/**",
+                  "**/src/app/**/(admin)/**",
+                  "@/components/admin/**",
+                  "**/src/components/admin/**"
+                ],
+                "message": "Learner code and shared layers must never import from admin folders. Shared code must go through src/lib, src/types, src/features, or src/components/shared."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

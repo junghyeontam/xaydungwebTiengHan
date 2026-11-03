@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import "../styles/tokens.css";
+@import "../styles/admin-tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-scale: 1;
+    --radius: 1rem;
+
+    /* Light Theme Tokens */
+    --background: 0 0% 100%;       /* Pure White #FFFFFF */
+    --foreground: 228 32% 16%;     /* Body #2B3445 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 228 32% 16%;
+
+    --primary: 225 68% 42%;        /* Primary blue #2347B5 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 216 38% 98%;      /* Subtle surface #F7F9FC */
+    --secondary-foreground: 228 32% 16%;
+
+    --accent: 214 78% 95%;         /* Tint panel #E8F1FC */
+    --accent-foreground: 225 68% 42%;
+
+    --color-border: #E6EAF1;
+    --color-border-strong: #D3DAE6;
+    --border: 218 31% 92%;         /* Border #E6EAF1 */
+    --input: 218 31% 92%;
+    --ring: 225 68% 42%;
+  }
+
+  /* Dark Theme */
+  .dark {
+    --background: 222 47% 8%;      /* Dark Navy #0B1120 */
+    --foreground: 214 32% 91%;
+
+    --card: 222 45% 12%;
+    --card-foreground: 214 32% 91%;
+
+    --primary: 226 100% 65%;       /* #4D77FF */
+    --primary-foreground: 222 47% 8%;
+
+    --secondary: 221 40% 15%;
+    --secondary-foreground: 214 32% 91%;
+
+    --accent: 222 44% 18%;
+    --accent-foreground: 226 100% 65%;
+
+    --color-border: #1F2E4A;
+    --color-border-strong: #2B3F63;
+    --border: 221 41% 21%;
+    --input: 221 41% 21%;
+    --ring: 226 100% 65%;
+  }
+
+  /* Cỡ chữ S / M / L */
+  html[data-font-size="s"] {
+    --font-scale: 0.9;
+    font-size: 14.5px;
+  }
+  html[data-font-size="m"] {
+    --font-scale: 1;
+    font-size: 16px;
+  }
+  html[data-font-size="l"] {
+    --font-scale: 1.12;
+    font-size: 18px;
+  }
+
+  *, ::before, ::after {
+    border-color: var(--color-border, #E6EAF1);
+  }
+
+  ::selection {
+    background-color: #3b82f6;
+    color: #ffffff;
+  }
+
+  ::-moz-selection {
+    background-color: #3b82f6;
+    color: #ffffff;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--body);
+    transition-property: color, background-color;
+    transition-duration: 200ms;
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0, "cv02", "cv03", "cv04", "cv11";
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--heading);
+    font-family: var(--font-heading, 'Plus Jakarta Sans', 'Be Vietnam Pro', sans-serif);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+}
+
+/* ==============================================================================
+ * Unified Numeral Typography System (Primary UI font only, never monospace)
+ * ============================================================================== */
+.num {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0;
+  white-space: nowrap;
+}
+
+.num-tabular {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0;
+  white-space: nowrap;
+}
+
+.num-kpi {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0;
+  white-space: nowrap;
+}
+
+.font-price,
+.font-num {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0;
+  white-space: nowrap;
+}
+
+/* Recharts & SVG Data Typography */
+.recharts-text,
+.recharts-cartesian-axis-tick-value,
+.recharts-tooltip-item,
+.recharts-default-tooltip,
+.recharts-legend-item-text {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0 !important;
+}
+
+/* Tinh chỉnh typography & đường nét Hàn Quốc */
+.font-korean {
+  font-family: 'Noto Sans KR', sans-serif;
+  word-break: keep-all;
+  letter-spacing: -0.01em;
+}
+
+/* Hiệu ứng hoa văn lưới truyền thống Hàn nhẹ nhàng */
+.bg-korean-pattern {
+  background-image: radial-gradient(rgba(18, 48, 47, 0.05) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+.dark .bg-korean-pattern {
+  background-image: radial-gradient(rgba(61, 187, 168, 0.06) 1.2px, transparent 1.2px);
+}
+
+/* Ambient glow & glassmorphic cards */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(18, 48, 47, 0.08);
+}
+.dark .glass-panel {
+  background: rgba(19, 36, 35, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* VIP Gold Shimmer */
+.vip-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 185, 58, 0.15) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(245, 185, 58, 0.15) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s infinite linear;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Thanh cuộn mềm */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(18, 48, 47, 0.15);
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(61, 187, 168, 0.4);
+}
+
+/* Focus ring dễ nhận diện cho Accessibility */
+*:focus-visible {
+  outline: 2px solid #3DBBA8;
+  outline-offset: 2px;
+}
