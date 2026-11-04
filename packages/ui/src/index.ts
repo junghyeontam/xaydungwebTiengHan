@@ -21,3 +21,5 @@ export * from "./ScrollReveal";
 export * from "./SectionHeading";
 export * from "./StatBand";
 export * from "./UnderlineTabs";
+export * from "./SurfaceSwitcher";
+export * from "./SurfaceDeniedView";

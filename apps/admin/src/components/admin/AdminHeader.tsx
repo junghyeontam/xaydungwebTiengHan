@@ -20,6 +20,8 @@ import { NotificationBell } from "./NotificationBell";
 import { AdminThemeToggle } from "./AdminThemeToggle";
 import type { AdminRole } from "@/features/auth-rbac/types";
 import { formatRoleLabel } from "@/features/auth-rbac/permissions";
+import { SurfaceSwitcher } from "@junghyeon/ui";
+import { getAccessibleSurfaces } from "@junghyeon/rbac";
 
 interface AdminHeaderProps {
   onOpenMobileMenu?: () => void;
@@ -121,8 +123,15 @@ export function AdminHeader({
         <AdminBreadcrumbs />
       </div>
 
-      {/* 2. Center/Right: Global Search + Quick Actions */}
+      {/* 2. Center/Right: Surface Switcher + Global Search + Quick Actions */}
       <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <SurfaceSwitcher
+          currentSurface={pathname?.includes("/system") ? "system" : "admin"}
+          allowedSurfaces={getAccessibleSurfaces(currentRole)}
+          activeRole={currentRole}
+          locale={currentLocale}
+        />
+
         {/* Global Search Shortcut Pill */}
         <button
           type="button"

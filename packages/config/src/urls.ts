@@ -7,6 +7,8 @@ export const SURFACE_ORIGINS: Record<SurfaceId, string> = {
   system: (process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3002") + "/system",
 };
 
+export const SURFACE_URLS = SURFACE_ORIGINS;
+
 export function getSurfaceUrl(surface: SurfaceId, path: string = "/"): string {
   const base = SURFACE_ORIGINS[surface].replace(/\/$/, "");
   const cleanPath = path.startsWith("/") ? path : `/${path}`;

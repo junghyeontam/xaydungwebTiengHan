@@ -50,8 +50,11 @@ export function middleware(req: NextRequest) {
   // 3. Surface Guard: Block learner and teach-only roles from accessing apps/admin
   const userRole =
     req.headers.get("x-user-role") ||
+    req.headers.get("x-admin-role") ||
+    req.cookies.get("jh_active_role")?.value ||
     req.cookies.get("jh_role")?.value ||
-    req.cookies.get("jh_admin_role")?.value;
+    req.cookies.get("jh_admin_role")?.value ||
+    req.nextUrl.searchParams.get("role");
 
   if (
     userRole &&
@@ -59,7 +62,13 @@ export function middleware(req: NextRequest) {
     !pathname.includes("/unauthorized") &&
     !pathname.includes("/login")
   ) {
-    return NextResponse.rewrite(new URL("/vi/admin/unauthorized", req.url), { status: 403 });
+    return NextResponse.rewrite(
+      new URL(
+        `/vi/admin/unauthorized?role=${encodeURIComponent(userRole)}&reason=SURFACE_FORBIDDEN&surface=admin`,
+        req.url
+      ),
+      { status: 403 }
+    );
   }
 
   // 4. Canonical clean paths for apps/admin -> rewrite to /vi/admin/*
@@ -97,7 +106,13 @@ export function middleware(req: NextRequest) {
   if (cleanRouteAliases[pathname]) {
     // System routes strictly require super_admin
     if (pathname.startsWith("/system/") && userRole && userRole !== "super_admin") {
-      return NextResponse.rewrite(new URL("/vi/admin/unauthorized", req.url), { status: 403 });
+      return NextResponse.rewrite(
+        new URL(
+          `/vi/admin/unauthorized?role=${encodeURIComponent(userRole)}&reason=SYSTEM_SUPER_ADMIN_ONLY&surface=system`,
+          req.url
+        ),
+        { status: 403 }
+      );
     }
     return NextResponse.rewrite(new URL(cleanRouteAliases[pathname], req.url));
   }
