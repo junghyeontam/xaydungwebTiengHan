@@ -18,6 +18,24 @@
         "property": "toFixed",
         "message": "Direct toFixed is forbidden. Use formatNumber or formatPercent from @/lib/format."
       }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": [
+              "**/apps/teach/**",
+              "**/apps/admin/**",
+              "@junghyeon/teach",
+              "@junghyeon/teach/**",
+              "@junghyeon/admin",
+              "@junghyeon/admin/**"
+            ],
+            "message": "Cross-app imports are strictly forbidden. apps/web must not import from sibling apps (teach, admin). Use packages/* instead."
+          }
+        ]
+      }
     ]
   },
   "overrides": [
@@ -33,7 +51,7 @@
     },
     {
       "files": [
-        "src/app/\\(learner\\)/**/*",
+        "src/app/(learner)/**/*",
         "src/app/*",
         "src/components/!(admin)/**/*",
         "src/components/*",
@@ -51,9 +69,15 @@
                   "@/app/**/(admin)/**",
                   "**/src/app/**/(admin)/**",
                   "@/components/admin/**",
-                  "**/src/components/admin/**"
+                  "**/src/components/admin/**",
+                  "**/apps/teach/**",
+                  "**/apps/admin/**",
+                  "@junghyeon/teach",
+                  "@junghyeon/teach/**",
+                  "@junghyeon/admin",
+                  "@junghyeon/admin/**"
                 ],
-                "message": "Learner code and shared layers must never import from admin folders. Shared code must go through src/lib, src/types, src/features, or src/components/shared."
+                "message": "Learner code and shared layers must never import from admin folders or sibling apps."
               }
             ]
           }

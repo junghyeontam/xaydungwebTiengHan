@@ -1,8 +1,8 @@
 # Monorepo Migration Progress Tracker (Source of Truth)
 
 > **Mode**: `CHECKPOINT` (Pause after M-2, M-4, M-6, M-8)  
-> **Last Updated**: 2026-11-04T17:44:45+07:00  
-> **Active Phase**: `M-6` (`done`) $\rightarrow$ Waiting at **CHECKPOINT 3** before `M-7`
+> **Last Updated**: 2026-11-04T22:54:30+07:00  
+> **Active Phase**: `M-8` (`in-progress`) $\rightarrow$ **CHECKPOINT 4 after M-8**
 
 ---
 
@@ -16,32 +16,27 @@
 | **M-3** | Create `apps/admin` (Port 3002) & Transitional Redirects | `done` | 2026-11-04 | `before-m-3` / `m-3-done` | All 11 workspaces `typecheck`/`lint`/`test` PASS; `apps/web` & `apps/admin` builds PASS; `smoke-m3.mjs` 200/308/403 PASS | Proceed to M-4 |
 | **M-4** | Create `apps/teach` (Port 3001) & Remove Teacher Routes from Admin | `done` | 2026-11-04 | `before-m-4` / `m-4-done` | All 12 workspaces `typecheck`/`lint`/`test` PASS; `apps/web`, `apps/teach`, `apps/admin` builds PASS; `smoke-m4.mjs` 200/308/403 PASS | Approved at Checkpoint 2 |
 | **M-5** | Cross-Subdomain SSO, Surface Guard, Switcher & 403 Pages | `done` | 2026-11-04 | `before-m-5` / `m-5-done` | All 12 workspaces `typecheck`/`lint`/`test`/`build` PASS; `smoke-m5.mjs` SSO cookies + 403 SurfaceDeniedView PASS | Proceed to M-6 |
-| **M-6** | System Area (`/system/**`) with `super_admin`, Re-Auth & 2FA | `done` | 2026-11-04 | `before-m-6` / `m-6-done` | All 12 workspaces `typecheck`/`lint`/`test`/`build` PASS; `smoke-m6.mjs` 11/11 `/system/*` routes + Step-Up Re-Auth <=15m + 15m Read-Only Impersonation PASS | **CHECKPOINT 3 reached** (Wait for `continue` to start M-7) |
-| **M-7** | Enforce Boundaries (ESLint + Bundle Check + Surface RLS) | `todo` | - | `before-m-7` / `m-7-done` | Pending | Proceed to M-8 |
-| **M-8** | Deployment Pipelines, Staging/Prod Configs & Runbook | `todo` | - | `before-m-8` / `m-8-done` | Pending | **CHECKPOINT 4 after M-8** |
+| **M-6** | System Area (`/system/**`) with `super_admin`, Re-Auth & 2FA | `done` | 2026-11-04 | `before-m-6` / `m-6-done` | All 12 workspaces `typecheck`/`lint`/`test`/`build` PASS; `smoke-m6.mjs` 11/11 `/system/*` routes + Step-Up Re-Auth <=15m + 15m Read-Only Impersonation PASS | Approved at Checkpoint 3 |
+| **M-7** | Enforce Boundaries (ESLint + Bundle Check + Surface RLS) | `done` | 2026-11-04 | `before-m-7` / `m-7-done` | ESLint boundary rules in all 3 apps; pure packages isolation; client bundle secret scan PASS (0 leaks); surface RLS migration added | Proceed to M-8 |
+| **M-8** | Deployment Pipelines, Staging/Prod Configs & Runbook | `in-progress` | 2026-11-04 | `before-m-8` / `m-8-done` | Pending | **CHECKPOINT 4 after M-8** |
 | **M-9** | Full E2E Surface Matrix, API/RLS Tests & Final Hardening | `todo` | - | `before-m-9` / `m-9-done` | Pending | Final Release |
 
 ---
 
 ## Detailed Phase Logs
 
-### Phase M-0..M-4 (`done`)
-- **Tags**: `pre-m0-audit`..`m-4-done`. Extracted 9 workspace packages and separated `apps/web` (`:3000`), `apps/teach` (`:3001`), and `apps/admin` (`:3002`) with 100% git history and `308` permanent redirects.
+### Phase M-0..M-6 (`done`)
+- **Tags**: `pre-m0-audit`..`m-6-done`. Extracted shared packages, separated `apps/web`, `apps/teach`, `apps/admin`, wired cross-subdomain SSO, and built the `/system/**` privileged area with Step-Up Re-Auth.
 
-### Phase M-5: Cross-Subdomain SSO, Surface Guard, Switcher & 403 Pages (`done`)
-- **Date**: 2026-11-04 | **Tags**: `before-m-5`, `m-5-done`
-- **Summary**: Added `SurfaceSwitcher` (`Alt+1/2/3/4`) and `SurfaceDeniedView` (`403`) in `@junghyeon/ui`, `/api/auth/sso-session` across `apps/web`, `apps/teach`, and `apps/admin`, mounted `SurfaceSwitcher` in all 3 app headers, and verified SSO cookie matrix with `smoke-m5.mjs`.
-
-### Phase M-6: System Area (`/system/**`) with `super_admin`, Re-Auth & 2FA (`done`)
-- **Date**: 2026-11-04 | **Tags**: `before-m-6`, `m-6-done`
+### Phase M-7: Enforce Boundaries (ESLint + Bundle Check + Surface RLS) (`done`)
+- **Date**: 2026-11-04 | **Tags**: `before-m-7`, `m-7-done`
 - **Files Moved/Changed**:
-  - Created `apps/admin/src/app/[locale]/(admin)/admin/system/layout.tsx` (High-security Red System Control Banner, sub-navigation for all 11 `/system/**` capabilities, and Step-Up Re-Auth modal).
-  - Created `apps/admin/src/app/[locale]/(admin)/admin/system/[section]/page.tsx` covering `roles`, `permissions`, `integrations`, `payment-keys`, `feature-flags`, `maintenance`, `backups`, `security-audit`, `audit-log`, `staff`, and `impersonation`, with typed-confirmation danger forms.
-  - Created `apps/admin/src/app/api/admin/system/route.ts` enforcing `super_admin` + `2FA` + fresh Step-Up Re-Authentication ($\le 15\text{m}$ via `jh_reauth_ts`) + 15-minute read-only impersonation cookie (`jh_impersonation_target`, `Max-Age=900`) + immutable `recordAuditLog`.
-  - Updated `apps/admin/src/middleware.ts` to route all 11 `/system/*` paths to `/[locale]/admin/system/[section]` and enforce `super_admin` + `2FA` at the edge.
-  - Added `packages/testing/scripts/smoke-m6.mjs`.
+  - Configured strict ESLint `no-restricted-imports` in `apps/web/.eslintrc.json`, `apps/teach/.eslintrc.json`, and `apps/admin/.eslintrc.json` preventing any cross-app sibling imports.
+  - Enhanced `packages/testing/scripts/check-no-cycles.mjs` with full boundary scanning: 0 cross-app imports across all 3 apps, pure packages (`ui`, `content-renderer`, `features`, `i18n`, `config`) verified never importing `auth`, `db`, `rbac`, or apps, and 0 circular dependencies.
+  - Cleansed `@junghyeon/config` and `@junghyeon/db` barrels by splitting client-safe constants from server-only services (`@junghyeon/db/supabase-server`), guaranteeing 0 client bundle secret leaks in `apps/web`.
+  - Added `supabase/migrations/20261104010000_surface_boundary_rls_policies.sql` defining Default-Deny surface RLS policies for learner, teacher, admin, and system surfaces.
+  - Added `packages/testing/scripts/test-boundaries.mjs` unit tests verifying the 24 role-surface combinations, mandatory 2FA enforcement, and system re-auth expiration.
 - **Gate Results**:
-  - `pnpm run typecheck`, `pnpm run lint`, `pnpm run test`, `pnpm --filter @junghyeon/admin run build` — PASS.
-  - `smoke-m4.mjs`, `smoke-m5.mjs`, and `smoke-m6.mjs` — PASS (all 11 `/system/*` routes return `200` for `super_admin` + 2FA, `403` for `admin`/`sales_crm`/`support_agent`/`marketing`/`read_only`/`teacher`/`learner` and `super_admin` without 2FA; `/api/admin/system` POST returns `403 REAUTH_REQUIRED` when re-auth is missing/expired and `200` when fresh $\le 15\text{m}$).
-- **Risks & Open TODOs**:
-  - Next phase (`M-7`) will enforce automated ESLint cross-app/package boundary rules, client bundle secret/admin-leak scanners on `apps/web`, and Supabase surface-level RLS policies.
+  - `pnpm -r run typecheck`, `pnpm -r run lint`, `pnpm -r run test`, `pnpm run build` — ALL PASS across all 12 workspaces.
+  - `check-boundaries` verified: 3 apps, 9 packages, 0 cross-app imports, 0 circular dependencies, 0 client secret leaks.
+  - `smoke-m4.mjs`, `smoke-m5.mjs`, `smoke-m6.mjs` verified: 100% PASS.

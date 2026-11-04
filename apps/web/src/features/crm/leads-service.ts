@@ -1,5 +1,5 @@
 import { recordAuditLog } from "@/features/audit/audit-service";
-import { getServiceSupabase } from "@/lib/supabase";
+import { getServiceSupabase } from "@/lib/supabase-server";
 
 export interface ConsultationLead {
   id: string;

@@ -7,5 +7,4 @@ export * from "./theory-collections-data";
 export * from "./products-data";
 export * from "./placement-test-data";
 export * from "./theory-storage-service";
-export * from "./audit-service";
 export * from "./supabase";

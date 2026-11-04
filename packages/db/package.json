@@ -17,7 +17,9 @@
     "./placement-test-data": "./src/placement-test-data.ts",
     "./theory-storage-service": "./src/theory-storage-service.ts",
     "./audit-service": "./src/audit-service.ts",
-    "./supabase": "./src/supabase.ts"
+    "./supabase": "./src/supabase.ts",
+    "./supabase-server": "./src/supabase-server.ts",
+    "./server": "./src/supabase-server.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

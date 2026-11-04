@@ -1,4 +1,4 @@
-import { getServiceSupabase } from "./supabase";
+import { getServiceSupabase } from "./supabase-server";
 
 export interface AuditLogEntry {
   id: string;
