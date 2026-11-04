@@ -35,11 +35,22 @@ export function middleware(req: NextRequest) {
   // 2. Allow API routes and static files directly, with role block on /api/admin
   if (pathname.startsWith("/api")) {
     if (pathname.startsWith("/api/admin")) {
-      const userRole = req.headers.get("x-user-role") || req.cookies.get("jh_role")?.value;
-      const adminRole = req.headers.get("x-admin-role") || req.nextUrl.searchParams.get("role");
-      if (userRole === "learner" || adminRole === "learner") {
+      const userRole =
+        req.headers.get("x-user-role") ||
+        req.cookies.get("jh_active_role")?.value ||
+        req.cookies.get("jh_role")?.value;
+      const adminRole =
+        req.headers.get("x-admin-role") ||
+        req.cookies.get("jh_active_role")?.value ||
+        req.nextUrl.searchParams.get("role");
+      if (
+        userRole === "learner" ||
+        adminRole === "learner" ||
+        userRole === "guest" ||
+        adminRole === "guest"
+      ) {
         return NextResponse.json(
-          { error: "Forbidden: Learner accounts cannot access admin APIs." },
+          { error: "Forbidden: Learner accounts cannot access admin APIs.", code: "FORBIDDEN" },
           { status: 403 }
         );
       }
@@ -47,14 +58,15 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // 3. Surface Guard: Block learner and teach-only roles from accessing apps/admin
+  // 3. Surface Guard: Block learner, guest and teach-only roles from accessing apps/admin
   const userRole =
     req.headers.get("x-user-role") ||
     req.headers.get("x-admin-role") ||
     req.cookies.get("jh_active_role")?.value ||
     req.cookies.get("jh_role")?.value ||
     req.cookies.get("jh_admin_role")?.value ||
-    req.nextUrl.searchParams.get("role");
+    req.nextUrl.searchParams.get("role") ||
+    "guest";
 
   if (
     userRole &&

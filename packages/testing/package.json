@@ -12,7 +12,8 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "node ./scripts/check-no-cycles.mjs",
-    "test": "node ./scripts/check-no-cycles.mjs && node ./scripts/test-boundaries.mjs"
+    "test": "node ./scripts/check-no-cycles.mjs && node ./scripts/test-boundaries.mjs",
+    "test:matrix": "node ./scripts/matrix-e2e.mjs"
   },
   "dependencies": {
     "@junghyeon/config": "workspace:*",

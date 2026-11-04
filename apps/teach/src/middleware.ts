@@ -34,7 +34,8 @@ export function middleware(req: NextRequest) {
     req.cookies.get("jh_active_role")?.value ||
     req.cookies.get("jh_role")?.value ||
     req.cookies.get("jh_admin_role")?.value ||
-    req.nextUrl.searchParams.get("role");
+    req.nextUrl.searchParams.get("role") ||
+    "guest";
 
   if (
     userRole &&

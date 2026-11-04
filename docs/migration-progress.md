@@ -1,8 +1,8 @@
 # Monorepo Migration Progress Tracker (Source of Truth)
 
-> **Mode**: `CHECKPOINT` (Pause after M-2, M-4, M-6, M-8)  
-> **Last Updated**: 2026-11-04T23:01:00+07:00  
-> **Active Phase**: `M-8` (`done`) $\rightarrow$ Waiting at **CHECKPOINT 4** before `M-9`
+> **Mode**: `CHECKPOINT` (All Checkpoints Complete!)  
+> **Last Updated**: 2026-11-04T23:38:00+07:00  
+> **Active Phase**: `M-9` (`done`) $\rightarrow$ **Monorepo Migration 100% COMPLETE**
 
 ---
 
@@ -18,8 +18,8 @@
 | **M-5** | Cross-Subdomain SSO, Surface Guard, Switcher & 403 Pages | `done` | 2026-11-04 | `before-m-5` / `m-5-done` | All 12 workspaces `typecheck`/`lint`/`test`/`build` PASS; `smoke-m5.mjs` SSO cookies + 403 SurfaceDeniedView PASS | Approved at Checkpoint 3 |
 | **M-6** | System Area (`/system/**`) with `super_admin`, Re-Auth & 2FA | `done` | 2026-11-04 | `before-m-6` / `m-6-done` | All 12 workspaces `typecheck`/`lint`/`test`/`build` PASS; `smoke-m6.mjs` 11/11 `/system/*` routes + Step-Up Re-Auth <=15m + 15m Read-Only Impersonation PASS | Approved at Checkpoint 3 |
 | **M-7** | Enforce Boundaries (ESLint + Bundle Check + Surface RLS) | `done` | 2026-11-04 | `before-m-7` / `m-7-done` | ESLint boundary rules in all 3 apps; pure packages isolation; client bundle secret scan PASS (0 leaks); surface RLS migration added | Proceed to M-8 |
-| **M-8** | Deployment Pipelines, Staging/Prod Configs & Runbook | `done` | 2026-11-04 | `before-m-8` / `m-8-done` | `vercel.json` configs; `.env.example` matrices; `.github/workflows/ci.yml`; multi-stage `Dockerfile`; `docs/deployment-runbook.md`; `smoke-m8.mjs` PASS | **CHECKPOINT 4 reached** (Wait for `continue` to start M-9) |
-| **M-9** | Full E2E Surface Matrix, API/RLS Tests & Final Hardening | `todo` | - | `before-m-9` / `m-9-done` | Pending | Final Release |
+| **M-8** | Deployment Pipelines, Staging/Prod Configs & Runbook | `done` | 2026-11-04 | `before-m-8` / `m-8-done` | `vercel.json` configs; `.env.example` matrices; `.github/workflows/ci.yml`; multi-stage `Dockerfile`; `docs/deployment-runbook.md`; `smoke-m8.mjs` PASS | Approved at Checkpoint 4 |
+| **M-9** | Full E2E Surface Matrix, API/RLS Tests & Final Hardening | `done` | 2026-11-04 | `before-m-9` / `m-9-done` | `matrix-e2e.mjs` 69/69 assertions PASS; all 3 apps production build PASS; 0 bundle leaks | **Monorepo Migration Complete** |
 
 ---
 
@@ -49,3 +49,23 @@
 - **Gate Results**:
   - `pnpm -r run typecheck`, `pnpm -r run lint`, `pnpm -r run test`, `pnpm run build` — ALL PASS across all 12 workspaces.
   - `smoke-m8.mjs` — PASS (all deployment configs and runbooks valid).
+
+### Phase M-9: Full E2E Surface Matrix, API/RLS Tests & Final Hardening (`done`)
+- **Date**: 2026-11-04 | **Tags**: `before-m-9`, `m-9-done`
+- **Files Moved/Changed**:
+  - Created `packages/testing/scripts/matrix-e2e.mjs` executing 69 assertions across:
+    1. 11-Persona $\times$ 4-Surface Access Matrix (44 tests verifying HTTP 200 vs HTTP 403 with `surface-denied-403`).
+    2. Transitional 308 redirects (`web/admin/*` $\rightarrow$ admin, `admin/admin/teaching/*` $\rightarrow$ teach, `admin/admin/publishing` $\rightarrow$ teach).
+    3. API role boundary enforcement (Learner mutation block, Sales CRM publish block, Content Editor drafting vs publisher requirement).
+    4. Dual-Control (Two-Person Rule): verified self-approval is rejected with HTTP 403 `TWO_PERSON_RULE_VIOLATION`, while independent administrator approval succeeds.
+    5. PII Masking: verified Sales CRM & Marketing receive masked email/phone (`***`) and hidden revenue (`-1`), while Super Admin receives unmasked records.
+    6. System Area Step-Up Re-Auth & 15m Impersonation: verified missing/expired (>15m) re-auth is blocked with 403 `REAUTH_REQUIRED`, fresh re-auth (<=15m) succeeds, and impersonation issues `jh_impersonation_target` cookie with `Max-Age=900`.
+    7. Audit Log Immutability: verified audit logs cannot be updated or deleted (strictly append-only ledger), and learner access is blocked with 403.
+    8. Seed Data Verification: verified roadmap curriculum, lesson drafts, and learner directory render correctly across all 3 surfaces.
+  - Hardened `apps/teach/src/middleware.ts` and `apps/admin/src/middleware.ts` to default unauthenticated requests to `"guest"` and enforce Default-Deny on staff APIs and surfaces.
+- **Gate Results**:
+  - `pnpm -r run typecheck` — PASS across all 12 workspaces.
+  - `pnpm -r run lint` — PASS across all 12 workspaces (0 cross-app imports, 0 cycles, 0 bundle leaks).
+  - `pnpm -r run test` — PASS across all 12 workspaces.
+  - `pnpm run build` — PASS across `apps/web`, `apps/teach`, `apps/admin`.
+  - `node packages/testing/scripts/matrix-e2e.mjs` — **69 / 69 PASSED (100%)**.
