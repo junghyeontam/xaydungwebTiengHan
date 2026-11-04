@@ -4,7 +4,9 @@
   "private": true,
   "packageManager": "pnpm@12.16.1",
   "scripts": {
-    "dev": "pnpm --filter @junghyeon/web dev",
+    "dev": "pnpm --parallel --filter \"@junghyeon/*\" run dev",
+    "dev:web": "pnpm --filter @junghyeon/web dev",
+    "dev:admin": "pnpm --filter @junghyeon/admin dev",
     "build": "pnpm -r run build",
     "lint": "pnpm -r run lint",
     "typecheck": "pnpm -r run typecheck",

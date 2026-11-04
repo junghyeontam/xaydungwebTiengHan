@@ -13,8 +13,8 @@
 | **M-0** | Repository Audit & Surface Architecture Docs | `done` | 2026-11-04 | `pre-m0-audit` / `m-0-done` | `tsc --noEmit` PASS; Docs complete | Proceed to M-1 |
 | **M-1** | Monorepo Skeleton (`pnpm`, `turbo`) & Move to `apps/web` | `done` | 2026-11-04 | `before-m-1` / `m-1-done` | `pnpm install`, `typecheck`, `lint`, `test`, `build` PASS | Proceed to M-2 |
 | **M-2** | Extract Shared Packages (`ui`, `content-renderer`, `features`, `auth`, `rbac`, `db`, `i18n`, `config`, `testing`) | `done` | 2026-11-04 | `before-m-2` / `m-2-done` | All 10 workspaces `typecheck`/`lint`/`test` PASS; 0 cycles; `apps/web` build + HTTP 200/403 smoke tests PASS | **CHECKPOINT 1 reached** (Wait for `continue` to start M-3) |
-| **M-3** | Create `apps/admin` (Port 3002) & Transitional Redirects | `todo` | - | `before-m-3` / `m-3-done` | Pending | Proceed to M-4 |
-| **M-4** | Create `apps/teach` (Port 3001) & Remove Teacher Routes from Admin | `todo` | - | `before-m-4` / `m-4-done` | Pending | **CHECKPOINT 2 after M-4** |
+| **M-3** | Create `apps/admin` (Port 3002) & Transitional Redirects | `done` | 2026-11-04 | `before-m-3` / `m-3-done` | All 11 workspaces `typecheck`/`lint`/`test` PASS; `apps/web` & `apps/admin` builds PASS; `smoke-m3.mjs` 200/308/403 PASS | Proceed to M-4 |
+| **M-4** | Create `apps/teach` (Port 3001) & Remove Teacher Routes from Admin | `in-progress` | 2026-11-04 | `before-m-4` / `m-4-done` | Pending | **CHECKPOINT 2 after M-4** |
 | **M-5** | Cross-Subdomain SSO, Surface Guard, Switcher & 403 Pages | `todo` | - | `before-m-5` / `m-5-done` | Pending | Proceed to M-6 |
 | **M-6** | System Area (`/system/**`) with `super_admin`, Re-Auth & 2FA | `todo` | - | `before-m-6` / `m-6-done` | Pending | **CHECKPOINT 3 after M-6** |
 | **M-7** | Enforce Boundaries (ESLint + Bundle Check + Surface RLS) | `todo` | - | `before-m-7` / `m-7-done` | Pending | Proceed to M-8 |
