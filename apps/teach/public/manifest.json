@@ -1,0 +1,17 @@
+{
+  "name": "Tiếng Hàn JungHyeon (정현)",
+  "short_name": "JungHyeon",
+  "description": "Nền tảng học tiếng Hàn thông minh từ số 0 đến TOPIK 6 - Học chắc, nói tự tin.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#12302F",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

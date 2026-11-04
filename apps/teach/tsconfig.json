@@ -1,0 +1,33 @@
+{
+  "extends": "../../packages/config/tsconfig.base.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*", "./*"],
+      "@junghyeon/config": ["../../packages/config/src/index.ts"],
+      "@junghyeon/config/*": ["../../packages/config/src/*"],
+      "@junghyeon/i18n": ["../../packages/i18n/src/index.ts"],
+      "@junghyeon/i18n/*": ["../../packages/i18n/src/*"],
+      "@junghyeon/features": ["../../packages/features/src/index.ts"],
+      "@junghyeon/features/*": ["../../packages/features/src/*"],
+      "@junghyeon/ui": ["../../packages/ui/src/index.ts"],
+      "@junghyeon/ui/*": ["../../packages/ui/src/*"],
+      "@junghyeon/rbac": ["../../packages/rbac/src/index.ts"],
+      "@junghyeon/rbac/*": ["../../packages/rbac/src/*"],
+      "@junghyeon/db": ["../../packages/db/src/index.ts"],
+      "@junghyeon/db/*": ["../../packages/db/src/*"],
+      "@junghyeon/auth": ["../../packages/auth/src/index.ts"],
+      "@junghyeon/auth/*": ["../../packages/auth/src/*"],
+      "@junghyeon/content-renderer": ["../../packages/content-renderer/src/index.ts"],
+      "@junghyeon/content-renderer/*": ["../../packages/content-renderer/src/*"],
+      "@junghyeon/testing": ["../../packages/testing/src/index.ts"],
+      "@junghyeon/testing/*": ["../../packages/testing/src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

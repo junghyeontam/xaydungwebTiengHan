@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "pnpm --parallel --filter \"@junghyeon/*\" run dev",
     "dev:web": "pnpm --filter @junghyeon/web dev",
+    "dev:teach": "pnpm --filter @junghyeon/teach dev",
     "dev:admin": "pnpm --filter @junghyeon/admin dev",
     "build": "pnpm -r run build",
     "lint": "pnpm -r run lint",

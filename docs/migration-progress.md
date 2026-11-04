@@ -1,8 +1,8 @@
 # Monorepo Migration Progress Tracker (Source of Truth)
 
 > **Mode**: `CHECKPOINT` (Pause after M-2, M-4, M-6, M-8)  
-> **Last Updated**: 2026-11-04T16:04:30+07:00  
-> **Active Phase**: `M-2` (`done`) $\rightarrow$ Waiting at **CHECKPOINT 1** before `M-3`
+> **Last Updated**: 2026-11-04T16:40:30+07:00  
+> **Active Phase**: `M-4` (`done`) $\rightarrow$ Waiting at **CHECKPOINT 2** before `M-5`
 
 ---
 
@@ -12,9 +12,9 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **M-0** | Repository Audit & Surface Architecture Docs | `done` | 2026-11-04 | `pre-m0-audit` / `m-0-done` | `tsc --noEmit` PASS; Docs complete | Proceed to M-1 |
 | **M-1** | Monorepo Skeleton (`pnpm`, `turbo`) & Move to `apps/web` | `done` | 2026-11-04 | `before-m-1` / `m-1-done` | `pnpm install`, `typecheck`, `lint`, `test`, `build` PASS | Proceed to M-2 |
-| **M-2** | Extract Shared Packages (`ui`, `content-renderer`, `features`, `auth`, `rbac`, `db`, `i18n`, `config`, `testing`) | `done` | 2026-11-04 | `before-m-2` / `m-2-done` | All 10 workspaces `typecheck`/`lint`/`test` PASS; 0 cycles; `apps/web` build + HTTP 200/403 smoke tests PASS | **CHECKPOINT 1 reached** (Wait for `continue` to start M-3) |
+| **M-2** | Extract Shared Packages (`ui`, `content-renderer`, `features`, `auth`, `rbac`, `db`, `i18n`, `config`, `testing`) | `done` | 2026-11-04 | `before-m-2` / `m-2-done` | All 10 workspaces `typecheck`/`lint`/`test` PASS; 0 cycles; `apps/web` build + HTTP 200/403 smoke tests PASS | Approved at Checkpoint 1 |
 | **M-3** | Create `apps/admin` (Port 3002) & Transitional Redirects | `done` | 2026-11-04 | `before-m-3` / `m-3-done` | All 11 workspaces `typecheck`/`lint`/`test` PASS; `apps/web` & `apps/admin` builds PASS; `smoke-m3.mjs` 200/308/403 PASS | Proceed to M-4 |
-| **M-4** | Create `apps/teach` (Port 3001) & Remove Teacher Routes from Admin | `in-progress` | 2026-11-04 | `before-m-4` / `m-4-done` | Pending | **CHECKPOINT 2 after M-4** |
+| **M-4** | Create `apps/teach` (Port 3001) & Remove Teacher Routes from Admin | `done` | 2026-11-04 | `before-m-4` / `m-4-done` | All 12 workspaces `typecheck`/`lint`/`test` PASS; `apps/web`, `apps/teach`, `apps/admin` builds PASS; `smoke-m4.mjs` 200/308/403 PASS | **CHECKPOINT 2 reached** (Wait for `continue` to start M-5) |
 | **M-5** | Cross-Subdomain SSO, Surface Guard, Switcher & 403 Pages | `todo` | - | `before-m-5` / `m-5-done` | Pending | Proceed to M-6 |
 | **M-6** | System Area (`/system/**`) with `super_admin`, Re-Auth & 2FA | `todo` | - | `before-m-6` / `m-6-done` | Pending | **CHECKPOINT 3 after M-6** |
 | **M-7** | Enforce Boundaries (ESLint + Bundle Check + Surface RLS) | `todo` | - | `before-m-7` / `m-7-done` | Pending | Proceed to M-8 |
@@ -35,22 +35,27 @@
 
 ### Phase M-2: Extract Shared Packages (`packages/*`) (`done`)
 - **Date**: 2026-11-04 | **Tags**: `before-m-2`, `m-2-done`
-- **Packages Extracted**:
-  1. `@junghyeon/config` (`brand.ts`, `urls.ts`, `env.ts`)
-  2. `@junghyeon/i18n` (`vi.json`, `en.json`, `translations.ts`, `I18nContext.tsx`)
-  3. `@junghyeon/features` (`format.ts`, `sm2.ts`, `speech.ts`, `profile/*`, curriculum data models)
-  4. `@junghyeon/ui` (`utils.ts`, `tokens.css`, `admin-tokens.css`, 22 shared UI components)
-  5. `@junghyeon/rbac` (`registry.ts`, `permissions.ts`, `types.ts`, `masking.ts`, `surfaces.ts` Role $\rightarrow$ Surface matrix)
-  6. `@junghyeon/db` (`database.types.ts`, `admin.types.ts`, `analytics.types.ts`, `supabase.ts`, `audit-service.ts`, data & storage services)
-  7. `@junghyeon/auth` (`client.ts`, `sso-cookie.ts`, `surface-guard.ts`, `require-permission.ts`)
-  8. `@junghyeon/content-renderer` (`LessonTheory`, `LessonExercises`, `LessonHeader`, `RoadmapTheoryLibrary`, `LessonPreviewModal`)
-  9. `@junghyeon/testing` (`personas.ts`, `scripts/check-no-cycles.mjs`, `scripts/smoke-m2.mjs`)
+- **Summary**: Extracted 9 workspace packages (`config`, `i18n`, `features`, `ui`, `rbac`, `db`, `auth`, `content-renderer`, `testing`); verified 0 circular dependencies and passed `smoke-m2.mjs`.
+
+### Phase M-3: Create `apps/admin` (Port 3002) & Transitional Redirects (`done`)
+- **Date**: 2026-11-04 | **Tags**: `before-m-3`, `m-3-done`
+- **Files Moved/Changed**:
+  - Scaffolded `apps/admin` (`@junghyeon/admin`, port `3002`, `noindex, nofollow`, `robots.txt: Disallow: /`).
+  - Moved `/[locale]/(admin)/admin/**`, `/api/admin/**`, and `src/components/admin/**` from `apps/web` to `apps/admin` via `git mv` (100% git rename history preserved).
+  - Added canonical top-level rewrites in `apps/admin/src/middleware.ts` (`/learners`, `/sales/orders`, `/leads`, `/appointments`, `/support`, `/campaigns`, `/banners`, `/coupons`, `/analytics`, `/reports`, `/content-health`, `/settings`, `/system/**`).
+  - Added transitional `308` permanent redirects from `apps/web/admin/*` to `NEXT_PUBLIC_ADMIN_URL` in `apps/web/src/middleware.ts`.
+- **Gate Results**: All 11 workspaces passed `typecheck`/`lint`/`test`; `apps/web` (`:3000`) and `apps/admin` (`:3002`) production builds and `smoke-m3.mjs` passed.
+
+### Phase M-4: Create `apps/teach` (Port 3001) & Remove Teacher Routes from Admin (`done`)
+- **Date**: 2026-11-04 | **Tags**: `before-m-4`, `m-4-done`
+- **Files Moved/Changed**:
+  - Scaffolded `apps/teach` (`@junghyeon/teach`, port `3001`, `noindex, nofollow`, `robots.txt: Disallow: /`).
+  - Moved `teaching/**` and `publishing/**` from `apps/admin` to `apps/teach` via `git mv`.
+  - Configured canonical Teacher Studio routes in `apps/teach` (`/`, `/lessons`, `/lessons/new`, `/lessons/[id]/edit`, `/banks/vocabulary`, `/banks/grammar`, `/roadmap-planner`, `/review-feedback`, `/classes`, `/grading`, `/analytics`, `/media`).
+  - Removed Teacher Studio navigation items from `apps/admin/src/components/admin/AdminSidebar.tsx` and added `308` permanent redirects in `apps/admin/src/middleware.ts` from `/admin/teaching/*` and `/admin/publishing` to `NEXT_PUBLIC_TEACH_URL`.
 - **Gate Results**:
-  - `pnpm install` — PASS
-  - `pnpm run typecheck` (all 10 workspaces) — PASS (0 errors)
-  - `pnpm run lint` & `check-no-cycles.mjs` — PASS (0 circular dependencies, 0 boundary violations)
-  - `pnpm run test` — PASS
-  - `pnpm --filter @junghyeon/web run build` — PASS (38 static/dynamic routes compiled)
-  - HTTP Smoke Test (`smoke-m2.mjs`) — PASS (`/`, `/roadmap`, `/theory`, `/lessons/beginner-1-lesson-3-ayo-eoyo-endings`, `/review`, `/profile`, `/shop`, `/auth`, `/vi/admin/login`, `/vi/admin/teaching/lessons` all return `200`; unauthorized `/api/admin/orders` GET & POST return `403`).
+  - `pnpm install`, `pnpm run typecheck`, `pnpm run lint`, `pnpm run test` (all 12 workspaces) — PASS (0 errors).
+  - Production builds for `apps/web`, `apps/teach`, `apps/admin` — PASS.
+  - Three-Surface HTTP Smoke Test (`smoke-m4.mjs`) — PASS (`apps/web` `:3000` 8/8 routes `200`; `apps/teach` `:3001` 12/12 Studio routes `200` + `403` for `learner`, `sales_crm`, `support_agent`, `marketing`, `read_only`; `apps/admin` `:3002` 10/10 back-office & `/system` routes `200` + `308` redirect on `/admin/teaching/lessons` + `403` for `teacher`).
 - **Risks & Open TODOs**:
-  - Next phase (`M-3`) will scaffold `apps/admin` on port `3002`, move back-office routes from `apps/web`, and install 308 permanent redirects from `apps/web/admin/*` to `NEXT_PUBLIC_ADMIN_URL`.
+  - Next phase (`M-5`) will wire Cross-Subdomain SSO cookies (`Domain=.junghyeon.com` in prod, host-only in localhost), Surface Guard middleware, the multi-surface Top-bar Surface Switcher (`packages/ui/SurfaceSwitcher`), and dedicated `403 Surface Denied` pages across all three apps.

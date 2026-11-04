@@ -1,9 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+const TEACH_ORIGIN = process.env.NEXT_PUBLIC_TEACH_URL || "http://localhost:3001";
 
-  // 1. Allow API routes and static files directly, with learner role block on /api/admin
+const ALLOWED_ADMIN_ROLES = new Set([
+  "admin",
+  "sales_crm",
+  "support_agent",
+  "marketing",
+  "read_only",
+  "super_admin",
+]);
+
+export function middleware(req: NextRequest) {
+  const { pathname, search } = req.nextUrl;
+
+  // 1. Transitional 308 redirects for Teacher Studio routes requested on apps/admin
+  if (
+    pathname.startsWith("/admin/teaching") ||
+    pathname.startsWith("/vi/admin/teaching") ||
+    pathname.startsWith("/en/admin/teaching") ||
+    pathname === "/admin/publishing" ||
+    pathname === "/vi/admin/publishing" ||
+    pathname === "/en/admin/publishing"
+  ) {
+    const cleanPath = pathname
+      .replace(/^\/(vi|en)\/admin\/teaching/, "")
+      .replace(/^\/admin\/teaching/, "")
+      .replace(/^\/(vi|en)\/admin\/publishing/, "/publishing")
+      .replace(/^\/admin\/publishing/, "/publishing");
+    const targetUrl = `${TEACH_ORIGIN.replace(/\/$/, "")}${cleanPath || "/lessons"}${search}`;
+    return NextResponse.redirect(targetUrl, 308);
+  }
+
+  // 2. Allow API routes and static files directly, with role block on /api/admin
   if (pathname.startsWith("/api")) {
     if (pathname.startsWith("/api/admin")) {
       const userRole = req.headers.get("x-user-role") || req.cookies.get("jh_role")?.value;
@@ -18,21 +47,22 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // 2. Surface Guard: Block learner role from accessing any staff page
+  // 3. Surface Guard: Block learner and teach-only roles from accessing apps/admin
   const userRole =
     req.headers.get("x-user-role") ||
     req.cookies.get("jh_role")?.value ||
     req.cookies.get("jh_admin_role")?.value;
 
   if (
-    userRole === "learner" &&
+    userRole &&
+    !ALLOWED_ADMIN_ROLES.has(userRole) &&
     !pathname.includes("/unauthorized") &&
     !pathname.includes("/login")
   ) {
     return NextResponse.rewrite(new URL("/vi/admin/unauthorized", req.url), { status: 403 });
   }
 
-  // 3. Canonical clean paths for apps/admin -> rewrite to /vi/admin/*
+  // 4. Canonical clean paths for apps/admin -> rewrite to /vi/admin/*
   const cleanRouteAliases: Record<string, string> = {
     "/": "/vi/admin",
     "/login": "/vi/admin/login",
@@ -72,7 +102,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.rewrite(new URL(cleanRouteAliases[pathname], req.url));
   }
 
-  // 4. Support /admin and /admin/* paths on apps/admin for seamless compatibility
+  // 5. Support /admin and /admin/* paths on apps/admin for compatibility
   if (pathname === "/admin") {
     return NextResponse.rewrite(new URL("/vi/admin", req.url));
   }
