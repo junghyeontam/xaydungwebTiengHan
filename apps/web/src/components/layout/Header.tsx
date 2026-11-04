@@ -8,8 +8,6 @@ import { useI18n } from "@/lib/i18n/I18nContext";
 import { useAuth } from "@/lib/context/AuthContext";
 import { BrandLogo } from "@/components/shared/BrandLogo";
 import { Button, ProBadge } from "@/components/shared";
-import { SurfaceSwitcher } from "@junghyeon/ui";
-import { getAccessibleSurfaces } from "@junghyeon/rbac";
 import {
   Sun,
   Moon,
@@ -39,17 +37,6 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [activeSsoRole, setActiveSsoRole] = useState<string>("guest");
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const roleFromQuery = params.get("role");
-      const cookieMatch = document.cookie.match(/(?:^|;\s*)(?:jh_active_role|jh_admin_role)=([^;]+)/);
-      const roleFromCookie = cookieMatch ? decodeURIComponent(cookieMatch[1]) : null;
-      setActiveSsoRole(roleFromQuery || roleFromCookie || "guest");
-    }
-  }, [pathname]);
 
   const userMenuRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -163,15 +150,8 @@ export function Header() {
           })}
         </nav>
 
-        {/* Toolbar: Surface Switcher (multi-surface staff only), Language Switcher, Theme Switcher, Sign In / Avatar */}
+        {/* Toolbar: Language Switcher, Theme Switcher, Sign In / Avatar */}
         <div className="flex items-center gap-2">
-          <SurfaceSwitcher
-            currentSurface="web"
-            allowedSurfaces={getAccessibleSurfaces(activeSsoRole)}
-            activeRole={activeSsoRole}
-            locale={locale === "en" ? "en" : "vi"}
-          />
-
           {/* Language Switcher */}
           <button
             type="button"

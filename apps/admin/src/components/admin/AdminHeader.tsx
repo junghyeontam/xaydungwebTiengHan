@@ -5,11 +5,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
-  Shield,
   Plus,
   Search,
   Globe,
-  ChevronDown,
   BookPlus,
   Tag,
   Megaphone,
@@ -18,10 +16,6 @@ import { useAdminAuth } from "@/features/auth-rbac/AdminAuthContext";
 import { AdminBreadcrumbs } from "./AdminBreadcrumbs";
 import { NotificationBell } from "./NotificationBell";
 import { AdminThemeToggle } from "./AdminThemeToggle";
-import type { AdminRole } from "@/features/auth-rbac/types";
-import { formatRoleLabel } from "@/features/auth-rbac/permissions";
-import { SurfaceSwitcher } from "@junghyeon/ui";
-import { getAccessibleSurfaces } from "@junghyeon/rbac";
 
 interface AdminHeaderProps {
   onOpenMobileMenu?: () => void;
@@ -34,9 +28,8 @@ export function AdminHeader({
 }: AdminHeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const { user, currentRole, switchRole } = useAdminAuth();
+  const { user } = useAdminAuth();
 
-  const [roleMenuOpen, setRoleMenuOpen] = useState(false);
   const [quickCreateOpen, setQuickCreateOpen] = useState(false);
 
   const currentLocale = pathname?.startsWith("/en") ? "en" : "vi";
@@ -53,58 +46,6 @@ export function AdminHeader({
     }
     router.push(newPath);
   };
-
-  const showDevSwitcher =
-    process.env.NODE_ENV !== "production" ||
-    process.env.NEXT_PUBLIC_ADMIN_DEV_PERSONA === "true";
-
-  const availableRoles: { role: AdminRole; label: string; desc: string }[] = [
-    {
-      role: "super_admin",
-      label: currentLocale === "en" ? "Super Admin" : "Quản Trị Tối Cao",
-      desc: currentLocale === "en" ? "Full system permissions" : "Toàn quyền quản trị hệ thống",
-    },
-    {
-      role: "admin",
-      label: currentLocale === "en" ? "Administrator" : "Quản Trị Vận Hành",
-      desc: currentLocale === "en" ? "Daily ops, content approval & refunds" : "Vận hành, duyệt bài & phê duyệt hoàn tiền",
-    },
-    {
-      role: "content_editor",
-      label: currentLocale === "en" ? "Content Editor" : "Biên Tập Viên",
-      desc: currentLocale === "en" ? "Draft lessons & vocab; cannot publish" : "Soạn thảo bài học; không thể tự duyệt",
-    },
-    {
-      role: "publisher",
-      label: currentLocale === "en" ? "Publisher" : "Kiểm Duyệt Viên",
-      desc: currentLocale === "en" ? "Review, approve & publish curriculum" : "Kiểm duyệt, góp ý & xuất bản bài giảng",
-    },
-    {
-      role: "teacher",
-      label: currentLocale === "en" ? "Teacher" : "Giảng Viên",
-      desc: currentLocale === "en" ? "Learner progress for assigned classes" : "Theo dõi học viên các lớp phụ trách",
-    },
-    {
-      role: "sales_crm",
-      label: currentLocale === "en" ? "Sales & CRM" : "Tư Vấn & Tuyển Sinh",
-      desc: currentLocale === "en" ? "Leads, orders & propose refunds" : "Quản lý leads, đơn hàng & đề xuất hoàn tiền",
-    },
-    {
-      role: "support_agent",
-      label: currentLocale === "en" ? "Support Agent" : "Chuyên Viên Hỗ Trợ",
-      desc: currentLocale === "en" ? "Tickets & unmasked contact info" : "Xem thông tin hỗ trợ; không xem doanh thu",
-    },
-    {
-      role: "marketing",
-      label: currentLocale === "en" ? "Marketing" : "Tiếp Thị & Growth",
-      desc: currentLocale === "en" ? "Coupons, banners & campaigns" : "Mã giảm giá, banner & chiến dịch",
-    },
-    {
-      role: "read_only",
-      label: currentLocale === "en" ? "Read-only" : "Quan Sát Viên",
-      desc: currentLocale === "en" ? "Masked observer; view only" : "Quan sát viên; ẩn PII & doanh thu",
-    },
-  ];
 
   return (
     <header className="h-16 px-4 sm:px-6 bg-admin-surface/80 backdrop-blur-md border-b border-admin-border sticky top-0 z-30 flex items-center justify-between gap-4">
@@ -123,14 +64,8 @@ export function AdminHeader({
         <AdminBreadcrumbs />
       </div>
 
-      {/* 2. Center/Right: Surface Switcher + Global Search + Quick Actions */}
+      {/* 2. Center/Right: Global Search + Quick Actions */}
       <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-        <SurfaceSwitcher
-          currentSurface={pathname?.includes("/system") ? "system" : "admin"}
-          allowedSurfaces={getAccessibleSurfaces(currentRole)}
-          activeRole={currentRole}
-          locale={currentLocale}
-        />
 
         {/* Global Search Shortcut Pill */}
         <button
@@ -207,67 +142,6 @@ export function AdminHeader({
           <Globe className="w-3.5 h-3.5 text-admin-text-muted" />
           <span className="uppercase">{currentLocale}</span>
         </button>
-
-        {/* Role Switcher Pill (Interactive RBAC Testing in Dev, Protected in Prod) */}
-        {showDevSwitcher ? (
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setRoleMenuOpen(!roleMenuOpen)}
-              className="h-9 px-3 flex items-center gap-1.5 rounded-admin-control bg-admin-surface hover:bg-admin-subtle text-xs font-semibold text-admin-text-primary border border-admin-border shadow-xs transition-colors"
-              title="Switch RBAC role to test authorization"
-            >
-              <Shield className="w-3.5 h-3.5 text-admin-brand-teal" />
-              <span className="hidden sm:inline">
-                {formatRoleLabel(currentRole, currentLocale)}
-              </span>
-              <ChevronDown className="w-3 h-3 text-admin-text-muted" />
-            </button>
-
-            {roleMenuOpen && (
-              <>
-                <div className="fixed inset-0 z-40" onClick={() => setRoleMenuOpen(false)} />
-                <div className="absolute right-0 mt-2 w-68 rounded-admin-card bg-admin-surface border border-admin-border shadow-admin-card z-50 p-2 space-y-1 animate-in fade-in-50 zoom-in-95 duration-150">
-                  <div className="px-2.5 py-1 text-[10px] font-semibold text-admin-text-muted uppercase tracking-wider">
-                    {currentLocale === "en" ? "Test RBAC Persona (Dev)" : "Mô Phỏng Phân Quyền (Dev)"}
-                  </div>
-                  {availableRoles.map((r) => (
-                    <button
-                      key={r.role}
-                      type="button"
-                      onClick={() => {
-                        switchRole(r.role);
-                        setRoleMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-2.5 py-2 rounded-admin-control text-xs flex flex-col transition-colors ${
-                        currentRole === r.role
-                          ? "bg-admin-brand-teal/10 text-admin-brand-teal font-semibold"
-                          : "hover:bg-admin-subtle text-admin-text-secondary hover:text-admin-text-primary"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span>{r.label}</span>
-                        {currentRole === r.role && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-admin-brand-teal" />
-                        )}
-                      </div>
-                      <span className="text-[10px] text-admin-text-muted font-normal">
-                        {r.desc}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        ) : (
-          <div className="h-9 px-3 flex items-center gap-1.5 rounded-admin-control bg-admin-surface text-xs font-semibold text-admin-text-primary border border-admin-border shadow-xs">
-            <Shield className="w-3.5 h-3.5 text-admin-brand-teal" />
-            <span className="hidden sm:inline">
-              {formatRoleLabel(currentRole, currentLocale)}
-            </span>
-          </div>
-        )}
 
         {/* Theme Toggle (Light / Dark / System) */}
         <AdminThemeToggle />

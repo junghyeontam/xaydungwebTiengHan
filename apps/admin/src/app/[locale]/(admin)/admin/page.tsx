@@ -222,14 +222,6 @@ export default function AdminDashboardPage() {
       {/* Top Banner / Welcome - Clean Tint Panel */}
       <div className="p-6 rounded-card bg-brand-tint border border-brand-frame/70 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full bg-brand-bg border border-brand-frame text-brand-primary font-bold text-xs uppercase tracking-wider">
-              Cổng Điều Hành
-            </span>
-            <span className="text-xs text-brand-secondary">
-              Vai trò: <strong className="text-brand-navy capitalize">{currentRole}</strong>
-            </span>
-          </div>
           <h1 className="text-xl sm:text-2xl font-black text-brand-navy tracking-tight">
             Xin chào, {user?.name || "Quản trị viên"}!
           </h1>
