@@ -90,29 +90,43 @@ export function middleware(req: NextRequest) {
     "/reports": "/vi/admin/analytics",
     "/content-health": "/vi/admin/content/lessons",
     "/settings": "/vi/admin/settings",
-    "/system/roles": "/vi/admin/settings/roles",
-    "/system/permissions": "/vi/admin/settings/roles",
-    "/system/staff": "/vi/admin/settings/staff",
-    "/system/audit-log": "/vi/admin/audit-logs",
-    "/system/security-audit": "/vi/admin/health",
-    "/system/backups": "/vi/admin/health",
-    "/system/integrations": "/vi/admin/settings",
-    "/system/payment-keys": "/vi/admin/settings",
-    "/system/feature-flags": "/vi/admin/settings",
-    "/system/maintenance": "/vi/admin/settings",
-    "/system/impersonation": "/vi/admin/settings/staff",
+    "/system/roles": "/vi/admin/system/roles",
+    "/system/permissions": "/vi/admin/system/permissions",
+    "/system/staff": "/vi/admin/system/staff",
+    "/system/audit-log": "/vi/admin/system/audit-log",
+    "/system/security-audit": "/vi/admin/system/security-audit",
+    "/system/backups": "/vi/admin/system/backups",
+    "/system/integrations": "/vi/admin/system/integrations",
+    "/system/payment-keys": "/vi/admin/system/payment-keys",
+    "/system/feature-flags": "/vi/admin/system/feature-flags",
+    "/system/maintenance": "/vi/admin/system/maintenance",
+    "/system/impersonation": "/vi/admin/system/impersonation",
   };
 
   if (cleanRouteAliases[pathname]) {
-    // System routes strictly require super_admin
-    if (pathname.startsWith("/system/") && userRole && userRole !== "super_admin") {
-      return NextResponse.rewrite(
-        new URL(
-          `/vi/admin/unauthorized?role=${encodeURIComponent(userRole)}&reason=SYSTEM_SUPER_ADMIN_ONLY&surface=system`,
-          req.url
-        ),
-        { status: 403 }
-      );
+    // System routes strictly require super_admin and 2FA
+    if (pathname.startsWith("/system/")) {
+      if (userRole && userRole !== "super_admin") {
+        return NextResponse.rewrite(
+          new URL(
+            `/vi/admin/unauthorized?role=${encodeURIComponent(userRole)}&reason=SYSTEM_SUPER_ADMIN_ONLY&surface=system`,
+            req.url
+          ),
+          { status: 403 }
+        );
+      }
+      const is2FA =
+        req.headers.get("x-2fa-verified") !== "false" &&
+        req.cookies.get("jh_2fa_verified")?.value !== "false";
+      if (!is2FA) {
+        return NextResponse.rewrite(
+          new URL(
+            `/vi/admin/unauthorized?role=super_admin&reason=2FA_REQUIRED&surface=system`,
+            req.url
+          ),
+          { status: 403 }
+        );
+      }
     }
     return NextResponse.rewrite(new URL(cleanRouteAliases[pathname], req.url));
   }
