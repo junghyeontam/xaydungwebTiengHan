@@ -248,9 +248,33 @@ importers:
       '@hookform/resolvers':
         specifier: ^7.0.1
         version: 7.0.1(@standard-schema/spec@1.1.0)(react-hook-form@7.91.0(@types/react@18.3.31)(react@18.3.1))(zod@4.6.7)
+      '@junghyeon/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@junghyeon/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@junghyeon/content-renderer':
+        specifier: workspace:*
+        version: link:../../packages/content-renderer
+      '@junghyeon/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@junghyeon/features':
+        specifier: workspace:*
+        version: link:../../packages/features
+      '@junghyeon/i18n':
+        specifier: workspace:*
+        version: link:../../packages/i18n
+      '@junghyeon/rbac':
+        specifier: workspace:*
+        version: link:../../packages/rbac
+      '@junghyeon/testing':
+        specifier: workspace:*
+        version: link:../../packages/testing
+      '@junghyeon/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@supabase/supabase-js':
         specifier: ^2.118.0
         version: 2.118.0
@@ -322,7 +346,141 @@ importers:
         specifier: ^5.6.3
         version: 5.9.3
 
+  packages/auth:
+    dependencies:
+      '@junghyeon/config':
+        specifier: workspace:*
+        version: link:../config
+      '@junghyeon/db':
+        specifier: workspace:*
+        version: link:../db
+      '@junghyeon/rbac':
+        specifier: workspace:*
+        version: link:../rbac
+      '@supabase/supabase-js':
+        specifier: ^2.118.0
+        version: 2.118.0
+    devDependencies:
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+
   packages/config: {}
+
+  packages/content-renderer:
+    dependencies:
+      '@junghyeon/features':
+        specifier: workspace:*
+        version: link:../features
+      '@junghyeon/ui':
+        specifier: workspace:*
+        version: link:../ui
+      lucide-react:
+        specifier: ^0.460.0
+        version: 0.460.0(react@18.3.1)
+      next:
+        specifier: 14.2.24
+        version: 14.2.24(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.19.43
+      '@types/react':
+        specifier: ^18
+        version: 18.3.31
+      '@types/react-dom':
+        specifier: ^18
+        version: 18.3.7(@types/react@18.3.31)
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+
+  packages/db:
+    dependencies:
+      '@junghyeon/config':
+        specifier: workspace:*
+        version: link:../config
+      '@junghyeon/rbac':
+        specifier: workspace:*
+        version: link:../rbac
+      '@supabase/supabase-js':
+        specifier: ^2.118.0
+        version: 2.118.0
+    devDependencies:
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+
+  packages/features:
+    dependencies:
+      '@junghyeon/config':
+        specifier: workspace:*
+        version: link:../config
+      zod:
+        specifier: ^4.6.7
+        version: 4.6.7
+
+  packages/i18n:
+    dependencies:
+      '@junghyeon/config':
+        specifier: workspace:*
+        version: link:../config
+
+  packages/rbac:
+    dependencies:
+      '@junghyeon/config':
+        specifier: workspace:*
+        version: link:../config
+    devDependencies:
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+
+  packages/testing:
+    dependencies:
+      '@junghyeon/config':
+        specifier: workspace:*
+        version: link:../config
+      '@junghyeon/rbac':
+        specifier: workspace:*
+        version: link:../rbac
+    devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.19.43
+      typescript:
+        specifier: ^5.6.3
+        version: 5.9.3
+
+  packages/ui:
+    dependencies:
+      '@junghyeon/config':
+        specifier: workspace:*
+        version: link:../config
+      '@junghyeon/features':
+        specifier: workspace:*
+        version: link:../features
+      '@junghyeon/i18n':
+        specifier: workspace:*
+        version: link:../i18n
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      framer-motion:
+        specifier: ^11.11.17
+        version: 11.18.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      lucide-react:
+        specifier: ^0.460.0
+        version: 0.460.0(react@18.3.1)
+      tailwind-merge:
+        specifier: ^2.5.5
+        version: 2.6.1
 
 packages:
 

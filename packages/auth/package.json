@@ -1,0 +1,29 @@
+{
+  "name": "@junghyeon/auth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./sso-cookie": "./src/sso-cookie.ts",
+    "./surface-guard": "./src/surface-guard.ts",
+    "./require-permission": "./src/require-permission.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "echo \"lint @junghyeon/auth ok\"",
+    "test": "echo \"test @junghyeon/auth ok\""
+  },
+  "dependencies": {
+    "@junghyeon/config": "workspace:*",
+    "@junghyeon/rbac": "workspace:*",
+    "@junghyeon/db": "workspace:*",
+    "@supabase/supabase-js": "^2.118.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

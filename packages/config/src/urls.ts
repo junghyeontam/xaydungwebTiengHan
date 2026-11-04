@@ -12,3 +12,11 @@ export function getSurfaceUrl(surface: SurfaceId, path: string = "/"): string {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   return `${base}${cleanPath}`;
 }
+
+export function getCookieDomain(): string | undefined {
+  return process.env.NEXT_PUBLIC_COOKIE_DOMAIN || undefined;
+}
+
+export function isProduction(): boolean {
+  return process.env.NODE_ENV === "production";
+}

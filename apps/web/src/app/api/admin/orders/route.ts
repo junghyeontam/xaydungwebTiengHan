@@ -61,7 +61,10 @@ export async function POST(req: NextRequest) {
     );
   } catch (err: any) {
     const isTwoPerson = err?.message?.includes("Two-person rule");
-    const isForbidden = err?.message?.includes("Forbidden") || err?.message?.includes("Permission denied");
+    const isForbidden =
+      err?.message?.includes("Forbidden") ||
+      err?.message?.includes("Permission denied") ||
+      err?.message?.includes("Access denied");
     return NextResponse.json(
       {
         error: err?.message || "Internal error",
