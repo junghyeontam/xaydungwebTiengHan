@@ -1,12 +1,14 @@
 {
-  "name": "tieng-han-junghyeon",
-  "version": "1.0.0",
+  "name": "tieng-han-junghyeon-monorepo",
+  "version": "2.0.0",
   "private": true,
+  "packageManager": "pnpm@12.16.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "pnpm --filter @junghyeon/web dev",
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint",
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test",
     "seed:admin": "ts-node scripts/seed-first-super-admin.ts",
     "test:smoke": "node scripts/run-admin-smoke-test.mjs"
   },
