@@ -8,11 +8,12 @@ interface SectionCardProps {
   title: string;
   description: string;
   icon?: React.ReactNode;
-  isEditing: boolean;
+  isEditing?: boolean;
   isSubmitting?: boolean;
-  onEditClick: () => void;
-  onCancelClick: () => void;
+  onEditClick?: () => void;
+  onCancelClick?: () => void;
   onSaveClick?: () => void;
+  hideEditControls?: boolean;
   children: React.ReactNode;
   footerNotice?: React.ReactNode;
   customActions?: React.ReactNode;
@@ -23,11 +24,12 @@ export function SectionCard({
   title,
   description,
   icon,
-  isEditing,
+  isEditing = false,
   isSubmitting = false,
   onEditClick,
   onCancelClick,
   onSaveClick,
+  hideEditControls = false,
   children,
   footerNotice,
   customActions,
@@ -63,41 +65,43 @@ export function SectionCard({
         <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
           {customActions}
 
-          {!isEditing ? (
-            <button
-              type="button"
-              onClick={onEditClick}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-brand-border bg-brand-bg hover:bg-brand-surface hover:border-brand-primary/40 text-xs font-bold text-brand-navy transition-all active:scale-95 shadow-2xs"
-            >
-              <Edit3 className="w-3.5 h-3.5 text-brand-primary" />
-              <span>Chỉnh sửa</span>
-            </button>
-          ) : (
-            <div className="flex items-center gap-2">
+          {!hideEditControls && (
+            !isEditing ? (
               <button
                 type="button"
-                onClick={onCancelClick}
-                disabled={isSubmitting}
-                className="px-3.5 py-2 rounded-xl border border-brand-border hover:bg-brand-bg text-xs font-bold text-brand-secondary transition-colors"
+                onClick={onEditClick}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-brand-border bg-brand-bg hover:bg-brand-surface hover:border-brand-primary/40 text-xs font-bold text-brand-navy transition-all active:scale-95 shadow-2xs"
               >
-                Hủy
+                <Edit3 className="w-3.5 h-3.5 text-brand-primary" />
+                <span>Chỉnh sửa</span>
               </button>
-              {onSaveClick && (
+            ) : (
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={onSaveClick}
+                  onClick={onCancelClick}
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-bold shadow-xs transition-all active:scale-95 disabled:opacity-50"
+                  className="px-3.5 py-2 rounded-xl border border-brand-border hover:bg-brand-bg text-xs font-bold text-brand-secondary transition-colors"
                 >
-                  {isSubmitting ? (
-                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  ) : (
-                    <Check className="w-3.5 h-3.5" />
-                  )}
-                  <span>Lưu thay đổi</span>
+                  Hủy
                 </button>
-              )}
-            </div>
+                {onSaveClick && (
+                  <button
+                    type="button"
+                    onClick={onSaveClick}
+                    disabled={isSubmitting}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-bold shadow-xs transition-all active:scale-95 disabled:opacity-50"
+                  >
+                    {isSubmitting ? (
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <Check className="w-3.5 h-3.5" />
+                    )}
+                    <span>Lưu thay đổi</span>
+                  </button>
+                )}
+              </div>
+            )
           )}
         </div>
       </div>

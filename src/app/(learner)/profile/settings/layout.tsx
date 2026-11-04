@@ -14,6 +14,7 @@ import { SettingsNav } from "@/features/profile/components/SettingsNav";
 import { StickySaveBar } from "@/features/profile/components/StickySaveBar";
 import { AvatarCropModal } from "@/features/profile/components/AvatarCropModal";
 import { MascotGalleryModal } from "@/features/profile/components/MascotGalleryModal";
+import { getMascotAvatarDataUrl } from "@/features/profile/mascot-svg";
 
 export default function SettingsLayout({
   children,
@@ -161,10 +162,10 @@ export default function SettingsLayout({
         isOpen={isMascotGalleryOpen}
         onClose={() => setIsMascotGalleryOpen(false)}
         onSelectMascot={(mascot) => {
-          // Use mascot Honey preset
+          const mascotDataUrl = getMascotAvatarDataUrl(mascot.mood);
           updateProfileState(
             {
-              avatarUrl: "", // Clear custom upload, uses mascot
+              avatarUrl: mascotDataUrl,
               avatarKind: "preset",
             },
             "avatar"

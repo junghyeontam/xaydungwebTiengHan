@@ -138,6 +138,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     initAuth();
+
+    // Listen to profile/user updates from settings or other tabs
+    const handleUserUpdated = () => {
+      try {
+        const localUser = localStorage.getItem("junghyeon_current_user");
+        if (localUser) {
+          setUser(JSON.parse(localUser));
+        }
+      } catch (err) {
+        console.warn("Lỗi đồng bộ junghyeon_current_user:", err);
+      }
+    };
+
+    window.addEventListener("jh_user_updated", handleUserUpdated);
+    window.addEventListener("storage", handleUserUpdated);
+
+    return () => {
+      window.removeEventListener("jh_user_updated", handleUserUpdated);
+      window.removeEventListener("storage", handleUserUpdated);
+    };
   }, []);
 
   const setAuthModalOpen = (open: boolean, tab: AuthModalTab = "login") => {

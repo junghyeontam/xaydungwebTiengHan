@@ -126,11 +126,13 @@ export function saveLearnerProfile(
       // Record field changes in local change log
       const logs = JSON.parse(localStorage.getItem("jh_profile_change_logs") || "[]");
       Object.keys(updates).forEach((k) => {
+        const rawVal = (updates as any)[k];
+        const masked = k === "avatarUrl" ? "[Ảnh đại diện mới]" : String(rawVal ?? "");
         logs.unshift({
           id: `log-${Date.now()}-${k}`,
           fieldName: k,
           fieldLabel: k,
-          newValueMasked: String((updates as any)[k]),
+          newValueMasked: masked,
           changedAt: new Date().toISOString(),
         });
       });

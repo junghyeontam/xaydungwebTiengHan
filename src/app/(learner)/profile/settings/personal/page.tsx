@@ -230,6 +230,31 @@ export default function PersonalSettingsPage() {
       ) : (
         /* ================= EDIT MODE (Two-Column Grid) ================= */
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          {/* Quick Avatar Change in Personal form */}
+          <div className="p-3.5 rounded-2xl bg-brand-bg/60 border border-brand-border flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-brand-primary/30 shrink-0 bg-brand-primary/10 flex items-center justify-center font-bold text-sm text-brand-primary">
+                {profile.avatarUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={profile.avatarUrl} alt={profile.fullName} className="w-full h-full object-cover" />
+                ) : (
+                  <span>{profile.fullName?.substring(0, 2).toUpperCase() || "JH"}</span>
+                )}
+              </div>
+              <div>
+                <div className="text-xs font-bold text-brand-navy dark:text-white">Ảnh đại diện & Linh vật</div>
+                <div className="text-[11px] text-brand-secondary">Tải ảnh đại diện từ thiết bị hoặc chọn chú hổ Honey</div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={openAvatarModal}
+              className="px-3.5 py-1.5 rounded-xl border border-brand-border bg-white dark:bg-brand-surface hover:border-brand-primary/40 text-xs font-bold text-brand-navy dark:text-white transition-all shadow-2xs cursor-pointer"
+            >
+              Đổi ảnh
+            </button>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {/* 1. Full Name */}
             <div className="space-y-1.5 text-left">

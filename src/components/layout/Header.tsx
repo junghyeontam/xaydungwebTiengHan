@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -22,7 +22,6 @@ import {
   HelpCircle,
   LogOut,
   Layers,
-  ChevronDown,
   Sparkles,
   Globe,
   Settings,
@@ -39,13 +38,47 @@ export function Header() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setUserMenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setUserMenuOpen(false);
+    }, 220);
+  };
+
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleClickOutside);
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
   }, []);
 
   const navLinks = [
@@ -162,49 +195,88 @@ export function Header() {
               </Button>
             </div>
           ) : (
-            <div className="relative">
+            <div
+              ref={userMenuRef}
+              className="relative"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              {/* Circular Avatar Trigger Button */}
               <button
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="flex items-center gap-2 p-1.5 sm:px-2.5 sm:py-1.5 rounded-control border border-brand-border bg-brand-bg hover:bg-brand-surface transition-all shadow-2xs"
-                aria-label="Mở menu người dùng"
+                type="button"
+                onClick={() => setUserMenuOpen((prev) => !prev)}
+                className="relative w-10 h-10 rounded-full p-0.5 border border-brand-border hover:border-brand-primary bg-brand-bg hover:bg-brand-surface transition-all shadow-2xs flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-brand-primary/30"
+                aria-label="Hồ sơ học viên"
+                title={user.fullName || "Hồ sơ học viên"}
               >
-                {/* Avatar */}
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                  {user.fullName ? user.fullName.charAt(0).toUpperCase() : "JH"}
+                <div className="w-full h-full rounded-full bg-gradient-to-tr from-brand-navy to-brand-primary text-white flex items-center justify-center font-bold text-xs shadow-xs overflow-hidden">
+                  {user.avatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={user.avatarUrl}
+                      alt={user.fullName || "User"}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span>{user.fullName ? user.fullName.charAt(0).toUpperCase() : "JH"}</span>
+                  )}
                 </div>
 
-                <div className="hidden sm:flex flex-col text-left">
-                  <span className="text-xs font-bold text-brand-navy leading-tight truncate max-w-[110px]">
-                    {user.fullName}
-                  </span>
-                  <span className="text-[10px] text-brand-primary font-semibold">
-                    {user.totalXp} XP • {user.streakDays}🔥
-                  </span>
-                </div>
-
-                <ChevronDown className="w-3.5 h-3.5 text-brand-muted" />
+                {/* Status Dot */}
+                <span
+                  className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-brand-bg"
+                  title="Đang hoạt động"
+                />
               </button>
 
               {/* User Dropdown Menu */}
               {userMenuOpen && (
                 <div
-                  className="absolute right-0 mt-2 w-56 rounded-card bg-brand-bg border border-brand-border shadow-card p-2 z-50 animate-in fade-in-50 zoom-in-95 duration-150"
+                  className="absolute right-0 mt-2 w-64 rounded-card bg-brand-bg border border-brand-border shadow-card p-2 z-50 animate-in fade-in-50 zoom-in-95 duration-150 before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3"
                   onClick={() => setUserMenuOpen(false)}
                 >
-                  <div className="p-3 border-b border-brand-border space-y-1">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-brand-navy truncate max-w-[120px]">
-                        {user.fullName}
-                      </span>
-                      {user.isVip ? (
-                        <ProBadge size="sm" label="VIP" />
-                      ) : (
-                        <span className="px-2 py-0.5 rounded-full bg-brand-surface text-brand-secondary font-semibold text-[10px] border border-brand-border">
-                          {locale === "vi" ? "Miễn phí" : "Free"}
-                        </span>
-                      )}
+                  {/* Dropdown Header: User info + XP & Streak */}
+                  <div className="p-3 border-b border-brand-border space-y-2">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-brand-navy to-brand-primary text-white flex items-center justify-center font-bold text-sm shrink-0 overflow-hidden shadow-xs">
+                        {user.avatarUrl ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={user.avatarUrl}
+                            alt={user.fullName || "User"}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span>{user.fullName ? user.fullName.charAt(0).toUpperCase() : "JH"}</span>
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center justify-between gap-1">
+                          <span className="text-xs font-bold text-brand-navy truncate">
+                            {user.fullName}
+                          </span>
+                          {user.isVip ? (
+                            <ProBadge size="sm" label="VIP" />
+                          ) : (
+                            <span className="px-1.5 py-0.5 rounded-full bg-brand-surface text-brand-secondary font-semibold text-[10px] border border-brand-border shrink-0">
+                              {locale === "vi" ? "Miễn phí" : "Free"}
+                            </span>
+                          )}
+                        </div>
+                        <div className="text-[11px] text-brand-muted truncate">{user.email}</div>
+                      </div>
                     </div>
-                    <div className="text-[11px] text-brand-muted truncate">{user.email}</div>
+
+                    {/* XP & Streak summary pills */}
+                    <div className="flex items-center gap-1.5 pt-1">
+                      <span className="inline-flex items-center gap-1 font-bold text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full text-[10px]">
+                        <Sparkles className="w-3 h-3" />
+                        {user.totalXp} XP
+                      </span>
+                      <span className="inline-flex items-center gap-1 font-bold text-amber-600 bg-amber-500/10 px-2 py-0.5 rounded-full text-[10px]">
+                        🔥 {user.streakDays} ngày
+                      </span>
+                    </div>
                   </div>
 
                   {/* Quick Upgrade to Premium */}

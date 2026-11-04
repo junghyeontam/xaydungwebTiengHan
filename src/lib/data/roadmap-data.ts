@@ -28,8 +28,8 @@ export interface RoadmapNode {
 
 export const ROADMAP_CATEGORIES = [
   { id: "grammar", label: "Ngữ pháp theo lộ trình", icon: "BookOpen" },
+  { id: "vocab-topik", label: "Từ vựng theo lộ trình", icon: "Award" },
   { id: "vocab-topic", label: "Từ vựng theo chủ đề", icon: "Sparkles" },
-  { id: "vocab-topik", label: "Từ vựng cấp TOPIK", icon: "Award" },
   { id: "hangul", label: "Bảng chữ cái Hangul", icon: "Languages" },
   { id: "dialogue", label: "Hội thoại thực chiến", icon: "MessageSquare" },
 ];

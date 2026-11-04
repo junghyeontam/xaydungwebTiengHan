@@ -168,7 +168,7 @@ export default function ProfilePage() {
     <div className="container mx-auto px-4 sm:px-6 py-10 space-y-10">
       {/* 1. Header Profile Card */}
       <div className="rounded-3xl bg-card border border-border shadow-card p-6 sm:p-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-junghyeon-teal/10 via-amber-100/10 to-transparent dark:from-junghyeon-teal/5 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-brand-primary/10 via-sky-100/10 to-transparent dark:from-brand-primary/5 pointer-events-none" />
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative z-10">
           <div className="flex items-center gap-5">
@@ -177,7 +177,7 @@ export default function ProfilePage() {
               <Link
                 href="/profile/settings/personal"
                 title="Bấm để đổi ảnh đại diện hoặc linh vật Honey"
-                className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-junghyeon-dark to-junghyeon-teal text-white flex items-center justify-center text-2xl sm:text-3xl font-extrabold shadow-md uppercase transition-transform group-hover:scale-102 overflow-hidden"
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-brand-navy to-brand-primary text-white flex items-center justify-center text-2xl sm:text-3xl font-extrabold shadow-md uppercase transition-transform group-hover:scale-102 overflow-hidden"
               >
                 {user.avatarUrl ? (
                   <img src={user.avatarUrl} alt={user.fullName} className="w-full h-full object-cover" />
@@ -190,7 +190,7 @@ export default function ProfilePage() {
               <Link
                 href="/profile/settings/personal"
                 title="Chỉnh sửa thông tin & ảnh đại diện"
-                className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-full bg-white dark:bg-card border border-border shadow-xs flex items-center justify-center text-muted-foreground hover:text-junghyeon-teal hover:border-junghyeon-teal transition-all"
+                className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-full bg-white dark:bg-card border border-brand-border shadow-xs flex items-center justify-center text-brand-secondary hover:text-brand-primary hover:border-brand-primary transition-all"
               >
                 <Edit3 className="w-3.5 h-3.5" />
               </Link>
@@ -205,7 +205,7 @@ export default function ProfilePage() {
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
                   {user.fullName}
                 </h1>
-                <span className="px-2.5 py-0.5 rounded-full bg-junghyeon-teal/15 text-junghyeon-teal text-xs font-bold">
+                <span className="px-2.5 py-0.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold">
                   Level 3 • Cây con 🪴
                 </span>
                 {user.isVip ? (
@@ -232,15 +232,8 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Action buttons */}
+          {/* Action buttons (removed duplicate 'Chỉnh sửa thông tin' button) */}
           <div className="flex items-center gap-2.5 flex-wrap self-stretch md:self-auto justify-end">
-            <Link
-              href="/profile/settings"
-              className="px-4 py-2.5 rounded-xl border border-junghyeon-teal/40 bg-junghyeon-teal/10 hover:bg-junghyeon-teal/20 text-junghyeon-teal text-xs font-bold transition-all flex items-center gap-1.5 shadow-2xs hover:scale-102"
-            >
-              <Settings className="w-3.5 h-3.5" />
-              <span>Chỉnh sửa thông tin</span>
-            </Link>
             <button
               onClick={() => setOnboardingOpen(true)}
               className="px-4 py-2.5 rounded-xl border border-border bg-secondary hover:bg-secondary/80 text-xs font-bold text-foreground transition-all flex items-center gap-1.5"
@@ -258,24 +251,24 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Quick Settings Shortcut Banner */}
-      <div className="rounded-2xl bg-gradient-to-r from-junghyeon-teal/10 via-amber-500/10 to-transparent border border-junghyeon-teal/20 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+      {/* Quick Settings Shortcut Banner (Synchronized with brand theme) */}
+      <div className="rounded-2xl bg-gradient-to-r from-brand-primary/8 via-brand-bg to-brand-surface border border-brand-border p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-junghyeon-teal text-white flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center shrink-0 shadow-xs">
             <Settings className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xs sm:text-sm font-bold text-foreground">
+            <div className="text-xs sm:text-sm font-bold text-brand-navy dark:text-white">
               Trung tâm Cài đặt hồ sơ & Tài khoản học viên
             </div>
-            <div className="text-[11px] sm:text-xs text-muted-foreground">
+            <div className="text-[11px] sm:text-xs text-brand-secondary">
               Cập nhật thông tin cá nhân, ảnh đại diện, linh vật Honey, mục tiêu TOPIK, đổi mật khẩu và quyền riêng tư
             </div>
           </div>
         </div>
         <Link
           href="/profile/settings"
-          className="px-4 py-2 rounded-xl bg-junghyeon-teal hover:bg-junghyeon-teal-hover text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 shrink-0 self-start sm:self-auto"
+          className="px-4 py-2 rounded-xl bg-brand-primary hover:bg-brand-primary-hover text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 shrink-0 self-start sm:self-auto"
         >
           <span>Mở Cài đặt hồ sơ</span>
           <ArrowRight className="w-3.5 h-3.5" />
