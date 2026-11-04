@@ -111,7 +111,7 @@ export function SectionCard({
 
       {/* Card Footer notice if any */}
       {footerNotice && (
-        <div className="px-6 sm:px-7 py-3.5 border-t border-brand-border/60 bg-brand-bg/40 text-[11px] text-brand-muted rounded-b-3xl">
+        <div className="px-6 sm:px-7 py-3.5 border-t border-brand-border/60 bg-brand-bg text-[11px] text-brand-muted rounded-b-3xl">
           {footerNotice}
         </div>
       )}

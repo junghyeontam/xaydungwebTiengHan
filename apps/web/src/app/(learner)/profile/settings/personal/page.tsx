@@ -231,7 +231,7 @@ export default function PersonalSettingsPage() {
         /* ================= EDIT MODE (Two-Column Grid) ================= */
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Quick Avatar Change in Personal form */}
-          <div className="p-3.5 rounded-2xl bg-brand-bg/60 border border-brand-border flex items-center justify-between gap-3">
+          <div className="p-3.5 rounded-2xl bg-brand-surface dark:bg-brand-bg border border-brand-border flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-brand-primary/30 shrink-0 bg-brand-primary/10 flex items-center justify-center font-bold text-sm text-brand-primary">
                 {profile.avatarUrl ? (

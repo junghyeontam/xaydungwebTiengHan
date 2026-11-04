@@ -155,16 +155,16 @@ export default function NotificationsSettingsPage() {
               }}
               className={`p-4 sm:p-4.5 rounded-2xl border transition-all flex items-center justify-between gap-4 cursor-pointer select-none active:scale-[0.99] ${
                 isChecked
-                  ? "border-brand-border bg-white dark:bg-brand-bg/40 shadow-2xs hover:border-brand-primary/40"
-                  : "border-brand-border/60 bg-brand-bg/30 opacity-75 hover:opacity-100 hover:border-brand-border"
+                  ? "border-brand-border bg-white dark:bg-brand-bg shadow-2xs hover:border-brand-primary/40"
+                  : "border-brand-border/60 bg-transparent opacity-65 hover:opacity-100 hover:border-brand-border"
               }`}
             >
               <div className="flex items-center gap-3.5 min-w-0">
                 <div
                   className={`w-10 h-10 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
                     isChecked
-                      ? "bg-brand-primary/10 text-brand-primary"
-                      : "bg-brand-border/60 text-brand-muted"
+                      ? "bg-brand-tint text-brand-primary"
+                      : "bg-brand-surface dark:bg-white/5 text-brand-muted"
                   }`}
                 >
                   <Icon className="w-5 h-5" />
@@ -173,7 +173,7 @@ export default function NotificationsSettingsPage() {
                   <h4 className="text-sm font-bold text-brand-navy dark:text-white truncate">
                     {item.title}
                   </h4>
-                  <p className="text-xs text-brand-secondary line-clamp-1">
+                  <p className="text-xs text-brand-secondary dark:text-slate-400 line-clamp-1">
                     {item.desc}
                   </p>
                 </div>

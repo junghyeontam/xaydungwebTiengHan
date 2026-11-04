@@ -262,9 +262,9 @@ export default function PrivacySettingsPage() {
         {!isEditing ? (
           /* View Mode */
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-2xl bg-brand-bg/50 border border-brand-border space-y-1">
+            <div className="p-4 rounded-2xl bg-brand-surface dark:bg-brand-bg border border-brand-border space-y-1">
               <div className="text-[11px] font-semibold text-brand-muted">Chế độ hiển thị hồ sơ</div>
-              <div className="text-xs font-bold text-brand-navy flex items-center gap-2">
+              <div className="text-xs font-bold text-brand-navy dark:text-white flex items-center gap-2">
                 {profile.profileVisibility === "public" && (
                   <>
                     <Globe className="w-4 h-4 text-brand-primary" />
@@ -286,9 +286,9 @@ export default function PrivacySettingsPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-brand-bg/50 border border-brand-border space-y-1">
+            <div className="p-4 rounded-2xl bg-brand-surface dark:bg-brand-bg border border-brand-border space-y-1">
               <div className="text-[11px] font-semibold text-brand-muted">Bảng xếp hạng tuần (Leaderboard)</div>
-              <div className="text-xs font-bold text-brand-navy flex items-center gap-2">
+              <div className="text-xs font-bold text-brand-navy dark:text-white flex items-center gap-2">
                 <Trophy className="w-4 h-4 text-amber-500" />
                 <span>
                   {profile.showOnLeaderboard !== false ? "Đang bật (Hiển thị điểm thi đua)" : "Đã tắt (Ẩn danh)"}
@@ -296,9 +296,9 @@ export default function PrivacySettingsPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-brand-bg/50 border border-brand-border space-y-1 md:col-span-2">
+            <div className="p-4 rounded-2xl bg-brand-surface dark:bg-brand-bg border border-brand-border space-y-1 md:col-span-2">
               <div className="text-[11px] font-semibold text-brand-muted">Chuỗi học liên tục (Streak)</div>
-              <div className="text-xs font-bold text-brand-navy flex items-center gap-2">
+              <div className="text-xs font-bold text-brand-navy dark:text-white flex items-center gap-2">
                 <Flame className="w-4 h-4 text-orange-500 fill-orange-500" />
                 <span>
                   {profile.showStreakPublic !== false
@@ -441,7 +441,7 @@ export default function PrivacySettingsPage() {
           </button>
         </div>
 
-        <div className="p-3.5 rounded-2xl bg-brand-bg/60 border border-brand-border text-xs text-brand-muted leading-relaxed">
+        <div className="p-3.5 rounded-2xl bg-brand-surface dark:bg-brand-bg border border-brand-border text-xs text-brand-muted leading-relaxed">
           💡 Bản sao dữ liệu chứa đầy đủ các thông tin theo chuẩn bảo vệ dữ liệu cá nhân (GDPR & PDPA): hồ sơ học viên, lộ trình ngữ pháp đã hoàn thành, danh sách từ vựng SRS theo từng cấp độ TOPIK.
         </div>
       </div>

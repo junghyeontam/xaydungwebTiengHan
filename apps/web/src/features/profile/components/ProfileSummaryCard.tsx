@@ -116,7 +116,7 @@ export function ProfileSummaryCard({
       </div>
 
       {/* 3. Profile Completeness Ring & Checklist */}
-      <div className="px-5 pb-5 pt-3 border-t border-brand-border space-y-3.5 bg-brand-bg/50">
+      <div className="px-5 pb-5 pt-3 border-t border-brand-border space-y-3.5 bg-brand-surface dark:bg-brand-bg">
         <div className="flex items-center justify-between">
           <div className="space-y-0.5">
             <span className="text-xs font-bold text-brand-navy dark:text-white">

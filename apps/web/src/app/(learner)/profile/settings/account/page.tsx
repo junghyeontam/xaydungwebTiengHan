@@ -196,7 +196,7 @@ export default function AccountSettingsPage() {
               <Lock className="w-3 h-3" /> Cố định
             </span>
           </label>
-          <div className="h-11 px-3.5 rounded-xl border border-brand-border bg-brand-bg/60 flex items-center justify-between">
+          <div className="h-11 px-3.5 rounded-xl border border-brand-border bg-brand-surface dark:bg-brand-bg flex items-center justify-between">
             <span className="font-semibold text-brand-navy dark:text-white truncate">
               {profile.email}
             </span>
