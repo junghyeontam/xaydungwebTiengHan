@@ -1,5 +1,3 @@
-import { getServiceSupabase } from "./supabase-server";
-
 export interface AuditLogEntry {
   id: string;
   actorId?: string | null;
@@ -65,34 +63,39 @@ export async function recordAuditLog(params: {
 
   memoryAuditLogs.unshift(entry);
 
-  try {
-    const supabase = getServiceSupabase();
-    await (supabase.from("audit_logs") as any).insert({
-      id: entry.id,
-      actor_id: entry.actorId,
-      actor_email: entry.actorEmail,
-      actor_role: entry.actorRole,
-      action: entry.action,
-      entity_type: entry.entityType,
-      entity_id: entry.entityId,
-      details: entry.details,
-      ip_address: entry.ipAddress,
-      created_at: entry.createdAt,
-    });
-  } catch (err: any) {
-    console.debug("[AuditLog] Supabase insert skipped (using memory):", err?.message);
+  if (typeof window === "undefined") {
+    try {
+      const { getServiceSupabase } = await import("./supabase-server");
+      const supabase = getServiceSupabase();
+      await (supabase.from("audit_logs") as any).insert({
+        id: entry.id,
+        actor_id: entry.actorId,
+        actor_email: entry.actorEmail,
+        actor_role: entry.actorRole,
+        action: entry.action,
+        entity_type: entry.entityType,
+        entity_id: entry.entityId,
+        details: entry.details,
+        ip_address: entry.ipAddress,
+        created_at: entry.createdAt,
+      });
+    } catch (err: any) {
+      console.debug("[AuditLog] Supabase insert skipped (using memory):", err?.message);
+    }
   }
 
   return entry;
 }
 
 export async function getAuditLogs(): Promise<AuditLogEntry[]> {
-  try {
-    const supabase = getServiceSupabase();
-    const result: any = await Promise.race([
-      supabase.from("audit_logs").select("*").order("created_at", { ascending: false }).limit(100),
-      new Promise((resolve) => setTimeout(() => resolve({ data: null, error: true }), 350)),
-    ]);
+  if (typeof window === "undefined") {
+    try {
+      const { getServiceSupabase } = await import("./supabase-server");
+      const supabase = getServiceSupabase();
+      const result: any = await Promise.race([
+        supabase.from("audit_logs").select("*").order("created_at", { ascending: false }).limit(100),
+        new Promise((resolve) => setTimeout(() => resolve({ data: null, error: true }), 350)),
+      ]);
 
     if (result && !result.error && result.data && result.data.length > 0) {
       const dbLogs = result.data.map((row: any) => ({
@@ -115,6 +118,7 @@ export async function getAuditLogs(): Promise<AuditLogEntry[]> {
       );
     }
   } catch {}
+}
 
   return memoryAuditLogs;
 }
