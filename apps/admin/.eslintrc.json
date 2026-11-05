@@ -1,0 +1,30 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "JSXAttribute[name.name='className'] Literal[value=/\\b(border-black|border-foreground|border-current)\\b/]",
+        "message": "Black/foreground borders are forbidden. Use tokens --color-border or semantic surface fills instead."
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": [
+          {
+            "group": [
+              "**/apps/web/**",
+              "**/apps/teach/**",
+              "@junghyeon/web",
+              "@junghyeon/web/**",
+              "@junghyeon/teach",
+              "@junghyeon/teach/**"
+            ],
+            "message": "Cross-app imports are strictly forbidden. apps/admin must not import from sibling apps (web, teach). Use packages/* instead."
+          }
+        ]
+      }
+    ]
+  }
+}

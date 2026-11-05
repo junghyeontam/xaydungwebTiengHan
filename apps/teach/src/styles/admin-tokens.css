@@ -1,0 +1,132 @@
+/* ==============================================================================
+ * JungHyeon Admin Design Tokens (Ember Polish in Premium Light Theme)
+ * ============================================================================== */
+
+:root {
+  /* Admin Canvas & Surfaces */
+  --admin-bg: #F7F7F5;
+  --admin-surface: #FFFFFF;
+  --admin-sidebar: #FBFBFA;
+  --admin-subtle: #F3F3F0;
+  
+  /* Admin Borders */
+  --admin-border: #E9E9E4;
+  --admin-border-strong: #DADAD3;
+
+  /* Admin Typography */
+  --admin-text-primary: #14201F;
+  --admin-text-secondary: #5B6665;
+  --admin-text-muted: #8E9796;
+  --admin-text-placeholder: #B3BAB9;
+
+  /* Brand Colors */
+  --admin-brand-dark: #12302F;
+  --admin-brand-teal: #3DBBA8;
+  --admin-brand-coral: #E8604C;
+  --admin-brand-yellow: #F5B93A;
+  --admin-brand-hanbok: #2F5D9E;
+
+  /* Semantic Colors & 10% Tints for Badges */
+  --admin-success: #1F9D6B;
+  --admin-success-tint: rgba(31, 157, 107, 0.10);
+  --admin-warning: #E39B1B;
+  --admin-warning-tint: rgba(227, 155, 27, 0.10);
+  --admin-danger: #D64545;
+  --admin-danger-tint: rgba(214, 69, 69, 0.10);
+  --admin-info: #2F5D9E;
+  --admin-info-tint: rgba(47, 93, 158, 0.10);
+
+  /* Plan & Segment Dots */
+  --admin-plan-enterprise: #6C5CE7;
+  --admin-plan-business: #2F5D9E;
+  --admin-plan-pro: #3DBBA8;
+  --admin-plan-starter: #F5B93A;
+  --admin-plan-free: #B3BAB9;
+
+  /* Radii */
+  --admin-radius-card: 16px;
+  --admin-radius-control: 11px;
+  --admin-radius-pill: 9999px;
+
+  /* Shadows (Quiet & elevated) */
+  --admin-shadow-card: 0 1px 2px rgba(20, 32, 31, 0.04), 0 8px 24px rgba(20, 32, 31, 0.04);
+  --admin-shadow-hover: 0 2px 6px rgba(20, 32, 31, 0.06), 0 14px 32px rgba(20, 32, 31, 0.06);
+  --admin-shadow-active-item: 0 1px 3px rgba(20, 32, 31, 0.05), 0 4px 12px rgba(20, 32, 31, 0.03);
+}
+
+.dark {
+  /* Admin Canvas & Surfaces (Dark Counterpart) */
+  --admin-bg: #0D1615;
+  --admin-surface: #132221;
+  --admin-sidebar: #0F1A19;
+  --admin-subtle: #192D2B;
+
+  /* Admin Borders */
+  --admin-border: #1E3634;
+  --admin-border-strong: #2A4A47;
+
+  /* Admin Typography */
+  --admin-text-primary: #F2F5F4;
+  --admin-text-secondary: #9FAEA9;
+  --admin-text-muted: #6B7D78;
+  --admin-text-placeholder: #465551;
+
+  /* Brand Colors in Dark */
+  --admin-brand-dark: #0A1413;
+  --admin-brand-teal: #45D1BD;
+  --admin-brand-coral: #F06E5C;
+  --admin-brand-yellow: #FAC44F;
+  --admin-brand-hanbok: #4479C4;
+
+  /* Semantic Tints in Dark */
+  --admin-success: #2CD693;
+  --admin-success-tint: rgba(44, 214, 147, 0.15);
+  --admin-warning: #F5AC2B;
+  --admin-warning-tint: rgba(245, 172, 43, 0.15);
+  --admin-danger: #E85B5B;
+  --admin-danger-tint: rgba(232, 91, 91, 0.15);
+  --admin-info: #4479C4;
+  --admin-info-tint: rgba(68, 121, 196, 0.15);
+
+  /* Plan & Segment Dots in Dark */
+  --admin-plan-enterprise: #8272F5;
+  --admin-plan-business: #4479C4;
+  --admin-plan-pro: #45D1BD;
+  --admin-plan-starter: #FAC44F;
+  --admin-plan-free: #6B7D78;
+
+  /* Shadows in Dark */
+  --admin-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --admin-shadow-hover: 0 2px 6px rgba(0, 0, 0, 0.3), 0 14px 32px rgba(0, 0, 0, 0.45);
+  --admin-shadow-active-item: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ==============================================================================
+ * Admin Numeral & Data Typography Tokens (Primary UI font only, never monospace)
+ * ============================================================================== */
+.admin-num,
+.num {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0;
+  white-space: nowrap;
+}
+
+.admin-num-tabular,
+.num-tabular {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0;
+  white-space: nowrap;
+}
+
+.admin-kpi-value,
+.num-kpi {
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "onum" 0, "zero" 0, "ss01" 0;
+  white-space: nowrap;
+}

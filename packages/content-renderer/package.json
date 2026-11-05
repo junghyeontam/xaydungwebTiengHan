@@ -1,0 +1,35 @@
+{
+  "name": "@junghyeon/content-renderer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./LessonTheory": "./src/LessonTheory.tsx",
+    "./LessonExercises": "./src/LessonExercises.tsx",
+    "./LessonHeader": "./src/LessonHeader.tsx",
+    "./RoadmapTheoryLibrary": "./src/RoadmapTheoryLibrary.tsx",
+    "./LessonPreviewModal": "./src/LessonPreviewModal.tsx"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "echo \"lint @junghyeon/content-renderer ok\"",
+    "test": "echo \"test @junghyeon/content-renderer ok\""
+  },
+  "dependencies": {
+    "@junghyeon/ui": "workspace:*",
+    "@junghyeon/features": "workspace:*",
+    "lucide-react": "^0.460.0",
+    "next": "14.2.24",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5.6.3"
+  }
+}

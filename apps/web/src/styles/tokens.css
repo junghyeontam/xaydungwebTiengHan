@@ -1,0 +1,195 @@
+/* ==============================================================================
+ * JungHyeon Design Tokens System (src/styles/tokens.css)
+ * Centralized CSS variables for Learner Site and Admin Portal.
+ * Default Preset: "ocean" (Clean White + Deep Navy + Primary Blue + Gold PRO)
+ * Heritage Preset: "forest" (Pine Green + Emerald Teal + Warm Cream)
+ * ============================================================================== */
+
+:root,
+html[data-theme-preset="ocean"] {
+  /* Canvas & Surfaces */
+  --bg: #FFFFFF;
+  --surface: #F7F9FC;
+  --tint-panel: #E3F0FF;          /* Tint selected/highlight */
+  --tint-growth: #E8F6F1;         /* Green tint for growth/success */
+  --tint-panel-hover: #D8EAFF;
+
+  /* Typography Colors */
+  --heading: #1B2A6B;
+  --body: #2B3445;
+  --secondary: #5B6577;
+  --muted: #8A93A5;
+
+  /* Borders & Dividers (Hairline, used sparingly) */
+  --color-border: #E6EAF1;
+  --color-border-strong: #D3DAE6;
+  --border: #E6EAF1;
+  --border-strong: #D3DAE6;
+
+  /* Brand Accents */
+  --primary: #1E44A8;
+  --primary-hover: #163688;
+  --primary-bright: #325FD8;
+  --frame: #D5E5FA;
+
+  /* Special Signals */
+  --gold: #F5B93A;                /* Only for PRO / XP stars */
+  --gold-tint: rgba(245, 185, 58, 0.12);
+  --coral: #E8604C;               /* Urgent / CTA text */
+  --coral-hover: #D34F3C;
+
+  /* Semantics */
+  --success: #1F9D6B;
+  --success-tint: #E8F6F1;
+  --warning: #E39B1B;
+  --warning-tint: rgba(227, 155, 27, 0.10);
+  --danger: #D64545;
+  --danger-tint: rgba(214, 69, 69, 0.10);
+  --info: #1E44A8;
+
+  /* Radii */
+  --radius-panel: 28px;
+  --radius-container: 28px;
+  --radius-card: 20px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+
+  /* Soft Shadows (No glow, no colored halo) */
+  --shadow-xs: 0 1px 2px rgba(20, 32, 80, 0.04);
+  --shadow-sm: 0 2px 6px rgba(20, 32, 80, 0.04);
+  --shadow-card: 0 8px 24px rgba(20, 32, 80, 0.05);
+  --shadow-card-hover: 0 10px 28px rgba(20, 32, 80, 0.07);
+}
+
+/* Heritage "forest" preset (switchable via brand.ts or data-theme-preset="forest") */
+html[data-theme-preset="forest"] {
+  --bg: #FAF7F2;
+  --surface: #F3EFE6;
+  --tint-panel: #E6F5F2;
+  --tint-growth: #E2F2ED;
+  --tint-panel-hover: #D5EDE9;
+
+  --heading: #12302F;
+  --body: #203837;
+  --secondary: #4D6664;
+  --muted: #7E9694;
+
+  --color-border: #DCE8E6;
+  --color-border-strong: #C5D9D6;
+  --border: #DCE8E6;
+  --border-strong: #C5D9D6;
+
+  --primary: #3DBBA8;
+  --primary-hover: #2E9E8E;
+  --primary-bright: #45D1BD;
+  --frame: #BEE3DC;
+
+  --gold: #F5B93A;
+  --gold-tint: rgba(245, 185, 58, 0.12);
+  --coral: #E8604C;
+  --coral-hover: #D34F3C;
+
+  --success: #1F9D6B;
+  --success-tint: #E2F2ED;
+  --warning: #E39B1B;
+  --warning-tint: rgba(227, 155, 27, 0.10);
+  --danger: #D64545;
+  --danger-tint: rgba(214, 69, 69, 0.10);
+  --info: #2F5D9E;
+
+  --radius-panel: 28px;
+  --radius-container: 28px;
+  --radius-card: 20px;
+  --radius-control: 12px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(18, 48, 47, 0.04);
+  --shadow-sm: 0 2px 6px rgba(18, 48, 47, 0.04);
+  --shadow-card: 0 8px 24px rgba(18, 48, 47, 0.05);
+  --shadow-card-hover: 0 10px 28px rgba(18, 48, 47, 0.07);
+}
+
+/* Dark Mode Tokens (Ocean Dark) */
+.dark,
+html[data-theme-preset="ocean"].dark {
+  --bg: #0B1120;
+  --surface: #111A2E;
+  --tint-panel: #16243D;
+  --tint-growth: #122B27;
+  --tint-panel-hover: #1E2F4E;
+
+  --heading: #F0F4FA;
+  --body: #CBD5E1;
+  --secondary: #94A3B8;
+  --muted: #64748B;
+
+  --color-border: #1F2E4A;
+  --color-border-strong: #2B3F63;
+  --border: #1F2E4A;
+  --border-strong: #2B3F63;
+
+  --primary: #4D77FF;
+  --primary-hover: #6088FF;
+  --primary-bright: #60A5FA;
+  --frame: #243555;
+
+  --gold: #FAC44F;
+  --gold-tint: rgba(250, 196, 79, 0.15);
+  --coral: #F06E5C;
+  --coral-hover: #E8604C;
+
+  --success: #2CD693;
+  --success-tint: rgba(44, 214, 147, 0.15);
+  --warning: #F5AC2B;
+  --warning-tint: rgba(245, 172, 43, 0.15);
+  --danger: #E85B5B;
+  --danger-tint: rgba(232, 91, 91, 0.15);
+  --info: #4D77FF;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* Forest Dark Mode */
+html[data-theme-preset="forest"].dark {
+  --bg: #0C1716;
+  --surface: #132423;
+  --tint-panel: #1A3331;
+  --tint-growth: #15312C;
+  --tint-panel-hover: #22423F;
+
+  --heading: #F2F7F6;
+  --body: #CCE2DE;
+  --secondary: #8EAFA9;
+  --muted: #607F7A;
+
+  --color-border: #244542;
+  --color-border-strong: #335E5A;
+  --border: #244542;
+  --border-strong: #335E5A;
+
+  --primary: #3DBBA8;
+  --primary-hover: #45D1BD;
+  --primary-bright: #45D1BD;
+  --frame: #1D3A37;
+
+  --gold: #FAC44F;
+  --gold-tint: rgba(250, 196, 79, 0.15);
+  --coral: #F06E5C;
+  --coral-hover: #E8604C;
+
+  --success: #2CD693;
+  --success-tint: rgba(44, 214, 147, 0.15);
+  --warning: #F5AC2B;
+  --warning-tint: rgba(245, 172, 43, 0.15);
+  --danger: #E85B5B;
+  --danger-tint: rgba(232, 91, 91, 0.15);
+  --info: #4479C4;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-card-hover: 0 10px 28px rgba(0, 0, 0, 0.45);
+}

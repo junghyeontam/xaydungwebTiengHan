@@ -1,0 +1,11 @@
+{
+  "extends": "../config/tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@junghyeon/config": ["../config/src/index.ts"],
+      "@junghyeon/features": ["../features/src/index.ts"],
+      "@junghyeon/i18n": ["../i18n/src/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

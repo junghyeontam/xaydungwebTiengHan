@@ -1,0 +1,37 @@
+{
+  "name": "@junghyeon/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./database.types": "./src/database.types.ts",
+    "./admin.types": "./src/admin.types.ts",
+    "./analytics.types": "./src/analytics.types.ts",
+    "./lessons-data": "./src/lessons-data.ts",
+    "./roadmap-data": "./src/roadmap-data.ts",
+    "./theory-collections-data": "./src/theory-collections-data.ts",
+    "./products-data": "./src/products-data.ts",
+    "./placement-test-data": "./src/placement-test-data.ts",
+    "./theory-storage-service": "./src/theory-storage-service.ts",
+    "./audit-service": "./src/audit-service.ts",
+    "./supabase": "./src/supabase.ts",
+    "./supabase-server": "./src/supabase-server.ts",
+    "./server": "./src/supabase-server.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "echo \"lint @junghyeon/db ok\"",
+    "test": "echo \"test @junghyeon/db ok\""
+  },
+  "dependencies": {
+    "@junghyeon/config": "workspace:*",
+    "@junghyeon/rbac": "workspace:*",
+    "@supabase/supabase-js": "^2.118.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
